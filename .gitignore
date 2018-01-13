@@ -1,0 +1,7 @@
+node_modules/
+dist/
+npm-debug.*
+.idea
+yarn.lock
+.env
+package-lock.json
