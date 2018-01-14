@@ -13,10 +13,17 @@ let userSchema = new Schema({
     type: String,
     min: [6, 'Your password should be greater than 6 characters.']
   },
+  mirror: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: Mirror
+    }
+  ],
   createdDate: {
-  type: Date,
-  default: Date.now
+    type: Date,
+    default: Date.now
   }
 });
+
 
 module.exports = mongoose.model('User', UserSchema);
