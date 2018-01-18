@@ -8,10 +8,10 @@ export default({ db }) => {
   let api = Router();
 
   api.get('/', (req, res) => {
-    option.find({})
+    Option.find({})
       .exec()
       .then(option => {
-        res.status(200).send(defaultResponseModel(true, 'Got Option', {option: option}))
+        res.status(200).send(defaultResponseModel(true, 'Got Option', {option: option}));
       })
       .catch(err => {
         res.status(404).send(defaultResponseModel(false, 'Mirror does not exist in Database'))
@@ -28,7 +28,7 @@ export default({ db }) => {
 
     option.save()
       .then(() => {
-        res.status(200).send(defaultresponseModel(true,'Option created', {_id: option._id}))
+        res.status(200).send(defaultResponseModel(true,'Option created', {_id: option._id}))
       })
 
   })

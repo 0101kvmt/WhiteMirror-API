@@ -4,17 +4,25 @@
 
 import http from 'http';
 import express from 'express';
+import bodyParser from 'body-parser';
 
-import routes from './server/routes'
+import routes from './server/routes';
 
 let app = express();
 
 var port = 3131;
 
-//API Routes v1
-app.use('/v1', routes);
 
 // Parse application/json
+var urlencoded_parser = bodyParser.urlencoded({
+    extended: true
+});
+
+app.use(bodyParser.json());
+app.use(urlencoded_parser);
+
+//API Routes v1
+app.use('/v1', routes);
 
 ////////////////////////////////////////////////////////////
 //                 Listening to server                    //
