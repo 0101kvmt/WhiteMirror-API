@@ -5,7 +5,7 @@ let Schema = mongoose.Schema;
 
 let SectionSchema = new Schema({
   sectionName: {
-    type: string,
+    type: String,
     required: true
   },
   options: [{

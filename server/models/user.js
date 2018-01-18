@@ -2,7 +2,7 @@ import mongoose from 'mongoose';
 
 let Schema = mongoose.Schema;
 
-let userSchema = new Schema({
+let UserSchema = new Schema({
   username: {
     type: String,
     required: [true, 'Please enter a valid username!'],

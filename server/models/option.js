@@ -1,15 +1,17 @@
 import mongoose from 'mongoose';
 
+let Schema = mongoose.Schema;
+
 const options = ['Weather', 'Time', 'Icon', 'To-do', 'Quotes', 'News', 'Twitter'];
 
 
-let Option = new Schema({
+let OptionSchema = new Schema({
   option1: {
      type: String,
      enum: options,
-     font: {type: String, default: 'Raleway'}
-     fontSize: {type: number, default: 12},
-     padding: {type: number, default: 5}
+     font: {type: String, default: 'Raleway'},
+     fontSize: {type: Number, default: 12},
+     padding: {type: Number, default: 5}
   },
 })
 

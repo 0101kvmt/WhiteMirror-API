@@ -3,14 +3,15 @@ import mongoose from 'mongoose';
 let Schema = mongoose.Schema;
 
 let MirrorSchema = new Schema({
-  section: {
+  section:
+  // {
     [{
       type: mongoose.Schema.Types.ObjectId,
       ref:'Section'
-    }],
-    validate: [arrayLimit, '{PATH} exceeds the limit of 5']
-  },
-
+    }]
+    // ,
+    // validate: [arrayLimit, '{PATH} exceeds the limit of 5']
+  // }
 });
 
 function arrayLimit(val) {

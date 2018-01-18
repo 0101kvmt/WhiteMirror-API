@@ -10,6 +10,7 @@ import mongoose from 'mongoose';
 ////////////////////////////////////////////////////////////
 
 let dbURI = "mongodb://localhost/WhiteMirror" || process.env.MONGODB_URI;
+
 export default callback => {
 
   mongoose.Promise = global.Promise;
@@ -21,4 +22,5 @@ export default callback => {
     }
   );
   callback(db);
+  console.log("db running");
 }

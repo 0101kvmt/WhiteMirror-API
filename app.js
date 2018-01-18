@@ -12,8 +12,9 @@ let app = express();
 var port = 3131;
 
 //API Routes v1
-app.use('/', routes);
+app.use('/v1', routes);
 
+// Parse application/json
 
 ////////////////////////////////////////////////////////////
 //                 Listening to server                    //
