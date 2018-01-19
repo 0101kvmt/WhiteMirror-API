@@ -1,5 +1,6 @@
 import mongoose from 'mongoose';
 
+import Mirror from './mirror';
 let Schema = mongoose.Schema;
 
 let UserSchema = new Schema({
