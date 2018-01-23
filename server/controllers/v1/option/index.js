@@ -9,8 +9,9 @@ export default({ db }) => {
   let api = Router();
 
   ////////////////////////////////////////////////////////////
-  //                         GET                            //
+  //                       GET '/'                          //
   ////////////////////////////////////////////////////////////
+
 
   api.get('/', (req, res) => {
     Option.find({})
@@ -28,6 +29,7 @@ export default({ db }) => {
   ////////////////////////////////////////////////////////////
 
   api.post('/', (req, res) => {
+
     const option = new Option({
       enum: req.body.enum,
       font: req.body.font,

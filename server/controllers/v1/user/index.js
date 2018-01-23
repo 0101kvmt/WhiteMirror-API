@@ -18,11 +18,24 @@ export default({db}) => {
       users.forEach((user) => {
         userMap[user._id] = user;
       });
-      res.status(200).send(defaultResponseModel(true, 'User has been succesfully found', {user: userMap}))
+      res.status(200).send(defaultResponseModel(true, 'User has been succesfully found.', {user: userMap}))
     })
+  });
+
+  ////////////////////////////////////////////////////////////
+  //                      GET '/:id'                        //
+  ////////////////////////////////////////////////////////////
+
+  api.get('/:id', (req, res, next) => {
+    User.findById(req.params.id)
+      .populate({path: 'mirror'})
       .exec()
-      .then(users => {
-        res.status(200).send(defaultResponseModel(true, 'User has been successfully found', {users: users}));
+      .then(user => {
+        res.status(200).send(defaultResponseModel(true, 'User has been succesfully found.', {user: user}));
+      })
+      .catch(err => {
+        res.status(404).send(defaultResponseModel(false, 'User does not exist in Database'));
+        return next();
       })
   })
 
@@ -35,8 +48,8 @@ export default({db}) => {
   })
 
   ////////////////////////////////////////////////////////////
-  //                       PUT '/'                          //
+  //                      PUT '/:id'                        //
   ////////////////////////////////////////////////////////////
-  
+
   return api;
 }

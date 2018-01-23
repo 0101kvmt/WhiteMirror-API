@@ -4,6 +4,7 @@
 
 require('dotenv').config();
 import mongoose from 'mongoose';
+import Option from './../models/option';
 
 ////////////////////////////////////////////////////////////
 //                    Mongoose Connect                    //
@@ -12,6 +13,11 @@ import mongoose from 'mongoose';
 let dbURI = "mongodb://localhost/WhiteMirror" || process.env.MONGODB_URI;
 
 console.log(Option.schema.path('option1').enumValues);
+
+////////////////////////////////////////////////////////////
+//                 Passport User Set-up                   //
+////////////////////////////////////////////////////////////
+
 
 export default callback => {
 
