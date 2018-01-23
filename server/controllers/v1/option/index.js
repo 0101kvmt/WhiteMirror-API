@@ -8,6 +8,10 @@ import { defaultResponseModel } from './../../../utils/response';
 export default({ db }) => {
   let api = Router();
 
+  ////////////////////////////////////////////////////////////
+  //                         GET                            //
+  ////////////////////////////////////////////////////////////
+
   api.get('/', (req, res) => {
     Option.find({})
       .exec()
@@ -18,6 +22,10 @@ export default({ db }) => {
         res.status(404).send(defaultResponseModel(false, 'Mirror does not exist in Database'))
       })
   });
+
+  ////////////////////////////////////////////////////////////
+  //                       POST '/'                         //
+  ////////////////////////////////////////////////////////////
 
   api.post('/', (req, res) => {
     const option = new Option({
@@ -49,6 +57,10 @@ export default({ db }) => {
       })
 
   })
+
+  ////////////////////////////////////////////////////////////
+  //                       PUT '/'                          //
+  ////////////////////////////////////////////////////////////
 
     return api;
 

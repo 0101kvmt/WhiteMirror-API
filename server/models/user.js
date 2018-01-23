@@ -1,6 +1,8 @@
 import mongoose from 'mongoose';
+import passportLocalMongoose from 'passport-local-mongoose';
 
 import Mirror from './mirror';
+
 let Schema = mongoose.Schema;
 
 let UserSchema = new Schema({
@@ -26,5 +28,6 @@ let UserSchema = new Schema({
   }
 });
 
+UserSchema.plugin(passportLocalMongoose);
 
 module.exports = mongoose.model('User', UserSchema);

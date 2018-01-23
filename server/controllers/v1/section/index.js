@@ -6,6 +6,10 @@ import { defaultResponseModel } from './../../../utils/response';
 export default ({ db }) => {
   let api = Router();
 
+  ////////////////////////////////////////////////////////////
+  //                         GET                            //
+  ////////////////////////////////////////////////////////////
+
   api.get('/', (req, res) => {
     Section.find({})
         .populate({path: 'options'})
@@ -17,6 +21,10 @@ export default ({ db }) => {
           res.status(404).send(defaultResponseModel(false, 'Section does not exist in database'));
         })
   });
+
+  ////////////////////////////////////////////////////////////
+  //                       GET /:id                         //
+  ////////////////////////////////////////////////////////////
 
   api.get('/:id', (req, res) => {
     Section.findById({_id: req.params.id})
