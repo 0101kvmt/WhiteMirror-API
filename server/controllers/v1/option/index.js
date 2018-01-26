@@ -53,9 +53,9 @@ export default({ db }) => {
 
             mirror.save()
               .then(() => {
-                console.log("mirror", mirror);
+                console.log("mirrorzzzz", mirror);
                 res.status(200).send(defaultResponseModel(true,'Option created', {option_id: option._id}));
-                User.update({_id: req.body.user}, { $push: { mirrors: mirror._id }})
+                User.update({_id: req.body.user}, { $push: { mirror: mirror._id }})
                   .exec();
               })
           })

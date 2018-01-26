@@ -14,7 +14,10 @@ export default({db}) => {
   ////////////////////////////////////////////////////////////
 
   api.get('/', (req, res) => {
-    User.find({}, (err, users) => {
+    User.find({})
+    .populate([{path: 'mirror', populate: [{path: 'section'}, {path: 'option'}]}])    
+    .exec()
+    .then(users => {
       let userMap = {};
 
       console.log('users', users);
@@ -23,6 +26,9 @@ export default({db}) => {
         userMap[user._id] = user;
       });
       res.status(200).send(defaultResponseModel(true, 'User has been succesfully found.', {user: userMap}))
+    })
+    .catch(err => {
+      res.status(404).send(defaultResponseModel(false, 'User does not exist in Database'));
     })
   });
 
