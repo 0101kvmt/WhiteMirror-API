@@ -2,6 +2,7 @@ import { Router } from 'express';
 import Option from './../../../models/option';
 import Section from './../../../models/section';
 import Mirror from './../../../models/mirror';
+import User from './../../../models/user';
 
 import { defaultResponseModel } from './../../../utils/response';
 
@@ -52,7 +53,10 @@ export default({ db }) => {
 
             mirror.save()
               .then(() => {
-                  res.status(200).send(defaultResponseModel(true,'Option created', {option_id: option._id}))
+                console.log("mirror", mirror);
+                res.status(200).send(defaultResponseModel(true,'Option created', {option_id: option._id}));
+                User.update({_id: req.body.user}, { $push: { mirrors: mirror._id }})
+                  .exec();
               })
           })
 

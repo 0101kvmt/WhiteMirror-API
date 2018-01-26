@@ -31,8 +31,8 @@ export default({db}) => {
   ////////////////////////////////////////////////////////////
 
   api.get('/:id', (req, res, next) => {
-    User.findById(req.params.id)
-      .populate({path: 'mirror'})
+    User.findById({ _id: req.params.id })
+      .populate([{path: 'mirror'}])
       .exec()
       .then(user => {
         res.status(200).send(defaultResponseModel(true, 'User has been succesfully found.', {user: user}));

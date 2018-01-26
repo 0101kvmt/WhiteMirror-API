@@ -19,7 +19,7 @@ let UserSchema = new Schema({
   mirror: [
     {
       type: mongoose.Schema.Types.ObjectId,
-      ref: Mirror
+      ref: 'Mirror'
     }
   ],
   createdDate: {
