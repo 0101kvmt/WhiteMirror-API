@@ -6,6 +6,7 @@ import mirror from '../controllers/v1/mirror';
 import option from '../controllers/v1/option';
 import section from '../controllers/v1/section';
 import user from '../controllers/v1/user';
+
 let router = express();
 
 initializeDb(db => {
