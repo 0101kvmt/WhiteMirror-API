@@ -6,7 +6,10 @@ import http from 'http';
 import express from 'express';
 import bodyParser from 'body-parser';
 import passport from 'passport';
+import swaggerJSDoc from 'swagger-jsdoc';
+import swaggerUi from 'swagger-ui-express';
 
+import { spec } from './server/utils/main_doc';
 import routes from './server/routes';
 import User from './server/models/user';
 
@@ -14,8 +17,9 @@ const LocalStrategy = require('passport-local').Strategy;
 
 let app = express();
 
-var port = 3131;
+var swggerdocs = spec;
 
+var port = 3131;
 
 ////////////////////////////////////////////////////////////
 //                      MiddleWare                        //
@@ -48,8 +52,20 @@ passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
 
 
-//API Routes v1
+////////////////////////////////////////////////////////////
+//                         Routes                         //
+////////////////////////////////////////////////////////////
+
 app.use('/v1', routes);
+
+// Serve swagger
+console.log("specsss", spec);
+app.get('/swagger.json', function(req, res) {
+  res.setHeader('Content-Type', 'application/json');
+  res.send(spec);
+});
+
+app.use('/v1/docs', swaggerUi.serve, swaggerUi.setup(spec));
 
 
 ////////////////////////////////////////////////////////////

@@ -35,6 +35,8 @@
     "mongoose": "^4.13.9",
     "passport": "^0.4.0",
     "passport-local": "^1.0.0",
-    "passport-local-mongoose": "^4.4.0"
+    "passport-local-mongoose": "^4.4.0",
+    "swagger-jsdoc": "^1.9.7",
+    "swagger-ui-express": "^2.0.14"
   }
 }
