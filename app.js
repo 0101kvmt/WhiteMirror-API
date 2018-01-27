@@ -59,7 +59,7 @@ passport.deserializeUser(User.deserializeUser());
 app.use('/v1', routes);
 
 // Serve swagger
-console.log("specsss", spec);
+
 app.get('/swagger.json', function(req, res) {
   res.setHeader('Content-Type', 'application/json');
   res.send(spec);

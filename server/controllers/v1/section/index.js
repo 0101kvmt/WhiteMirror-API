@@ -7,8 +7,9 @@ export default ({ db }) => {
   let api = Router();
 
   ////////////////////////////////////////////////////////////
-  //                         GET                            //
+  //                       GET '/'                          //
   ////////////////////////////////////////////////////////////
+
 
   api.get('/', (req, res) => {
     Section.find({})
@@ -28,7 +29,7 @@ export default ({ db }) => {
 
   api.get('/:id', (req, res) => {
     Section.findById({_id: req.params.id})
-        .populate({path: 'options'})
+
         .exec()
         .then(section => {
           res.status(200).send(defaultResponseModel(true, 'Section has been successfully found', {section: section}));
@@ -37,6 +38,11 @@ export default ({ db }) => {
           res.status(404).send(defaultResponseModel(false, 'Section does not exist'));
         })
   });
+
+
+  ////////////////////////////////////////////////////////////
+  //                       PUT '/'                          //
+  ////////////////////////////////////////////////////////////
 
     return api;
 
