@@ -8,6 +8,7 @@ import bodyParser from 'body-parser';
 import passport from 'passport';
 import swaggerJSDoc from 'swagger-jsdoc';
 import swaggerUi from 'swagger-ui-express';
+import path from 'path';
 
 import { spec } from './server/utils/main_doc';
 import routes from './server/routes';
@@ -33,7 +34,11 @@ var urlencoded_parser = bodyParser.urlencoded({
 app.use(bodyParser.json());
 app.use(urlencoded_parser);
 
+app.use(express.static(__dirname + '/build'));
 
+app.get('*', function response(req, res) {
+  res.sendFile(path.join(__dirname, '/build/index.html'));
+});
 ////////////////////////////////////////////////////////////
 //                   Passport Config                      //
 ////////////////////////////////////////////////////////////
