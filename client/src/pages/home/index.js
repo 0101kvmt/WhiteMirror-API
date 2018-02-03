@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 
-import Wrapper from './../../components/Wrapper';
+import { Wrapper } from './../../components/Wrapper';
 
 class Home extends Component {
   render() {
     return(
-      <Wrapper> </Wrapper>
+      <Wrapper></Wrapper>
     )
   }
 }

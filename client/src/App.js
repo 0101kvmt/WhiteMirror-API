@@ -1,47 +1,52 @@
 import React, { Component } from 'react';
 import { BrowserRouter, Route, Link } from 'react-router-dom';
-import styled from 'styled-components';
+import styled, { injectGlobal } from 'styled-components';
 
 
 import Mirror from './pages/mirror';
 import Registration from './pages/registration';
 import Home from './pages/home';
 
-import Wrapper from './components/Wrapper';
-import Nav from './components/Nav';
+import { MenuBtn } from './components/MenuBtn';
+import { Wrapper } from './components/Wrapper';
+import { NavContainer, NavLink } from './components/Nav';
+
+const LinkStyle = {
+  textDecoration: 'none',
+  color: 'white'
+}
+
+
 
 
 class App extends Component {
   render() {
-    const location = null;
-    console.log(location);
+
+    const handleClick = () => {
+      console.log("yee haw!");
+    }
+
     return (
-
+      <div className={this.props.className}>
       <BrowserRouter>
-            <div className={this.props.className}>
-      <Wrapper>
-      <div>
-      <Nav bloop={location}>
-        <ul>
-          <li><Link to="/">Home</Link></li>
-          <li><Link to="/about">About</Link></li>
-          <li><Link to="/registration">Registration</Link></li>
-          <li><Link to="/mirror">Mirrors</Link></li>
-        </ul>
-      </Nav>
+        <Wrapper>
 
+          <MenuBtn href="#" onClick={handleClick}> W </MenuBtn>
 
-           <hr/>
+          <NavContainer bloop={location}>
+            <ul>
+              <NavLink><Link style={{...LinkStyle}} to="/">Home</Link></NavLink>
+              <NavLink><Link style={{...LinkStyle}} to="/registration">Registration</Link></NavLink>
+              <NavLink><Link style={{...LinkStyle}} to="/mirror">Mirrors</Link></NavLink>
+            </ul>
+          </NavContainer>
+               <Route exact path="/" component={Home}/>
+               <Route path="/mirror" component={Mirror}/>
+               <Route path="/registration" component={Registration}/>
 
-           <Route exact path="/" component={Home}/>
-           <Route path="/about" component={About}/>
-           <Route path="/mirror" component={Mirror}/>
-           <Route path="/registration" component={Registration}/>
-         </div>
-      </Wrapper>
-            </div>
+        </Wrapper>
       </BrowserRouter>
-
+      </div>
 
     )
   }
@@ -57,17 +62,6 @@ const Button = styled.button`
 `;
 
 
-const About = () => (
-  <div className={this.props.className}>
-  <Button> Im a button yee haw </Button>
-    <h2>About</h2>
-  </div>
-)
-
-
-
 export default styled(App)`
-  background-color: yellow;
-  text-align: center;
-  color: orange;
+  background-color: black;
 `;
