@@ -1,6 +1,8 @@
+import React, { Component } from 'react';
+import { BrowserRouter, Route, Link } from 'react-router-dom';
 import styled from 'styled-components';
 
-export const NavContainer = styled.div`
+const NavContainer = styled.div`
   position: absolute;
   text-align: left;
   color: ${props => props.bloop || 'white'};
@@ -12,7 +14,7 @@ export const NavContainer = styled.div`
   z-index: 10;
 `;
 
-export const NavLink = styled.div`
+const NavLink = styled.div`
   padding: 8px 8px 8px 32px;
   text-decoration: none;
   font-size: 25px;
@@ -20,3 +22,33 @@ export const NavLink = styled.div`
   display: block;
   transition: 0.3s;
 `;
+
+const LinkStyle = {
+  textDecoration: 'none',
+  color: 'white'
+}
+
+class Nav extends Component {
+
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      menuHidden: true,
+    };
+  }
+
+  render() {
+    return (
+      <NavContainer>
+        <ul>
+          <NavLink><Link style={{...LinkStyle}} to="/">Home</Link></NavLink>
+          <NavLink><Link style={{...LinkStyle}} to="/mirror">Mirrors</Link></NavLink>
+          <NavLink><Link style={{...LinkStyle}} to="/settings">Settings</Link></NavLink>
+        </ul>
+      </NavContainer>
+    );
+  }
+}
+
+export default Nav;
