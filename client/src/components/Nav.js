@@ -7,12 +7,14 @@ import {MenuBtn} from './Menubtn';
 const NavContainer = styled.div`
   position: absolute;
   color: ${props => props.bloop || 'white'};
-  opacity: ${props => props.hidden ? '0' : '100'};
-  background-color: grey;
+  background-color: transparent;
   width: 250px;
   height: 100%;
   z-index: 10;
-  transition: 3s;
+  opacity: ${props => props.hidden ? '0' : '100'};
+  transition: 1s;
+  -webkit-transition: opacity 2s, height 2s, background-color 2s, -webkit-transform 2s;
+  transition: width 2s, height 2s, background-color 2s, transform 2s;
 `;
 
 const NavLink = styled.div`
@@ -22,7 +24,7 @@ const NavLink = styled.div`
   color: ${props => props.hover ? 'red' : 'blue'};
   display: block;
   opacity: 100;
-  transition: 3s;
+  transition: 1s;
 `;
 
 const WholeContainer = styled.div`
@@ -39,6 +41,7 @@ const WholeContainer = styled.div`
 const LinkStyle = {
   textDecoration: 'none',
   color: 'white'
+
 }
 
 class Nav extends Component {

@@ -13,4 +13,5 @@ export const MenuBtn = styled.a`
   z-index: 12;
   margin: 10px;
   opacity: ${props => props.show ? '0' : '100'};
+  transition: .5s;
 `;
