@@ -8,7 +8,6 @@ import Registration from './pages/registration';
 import Home from './pages/home';
 import Settings from './pages/settings';
 
-import { MenuBtn } from './components/MenuBtn';
 import { Wrapper } from './components/Wrapper';
 import Nav from './components/Nav';
 
@@ -24,7 +23,6 @@ class App extends Component {
     return (
       <BrowserRouter>
         <Wrapper>
-          <MenuBtn href="#"> W </MenuBtn>
           <Nav />
                <Route exact path="/" component={Home}/>
                <Route path="/mirror" component={Mirror}/>

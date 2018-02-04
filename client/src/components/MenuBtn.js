@@ -12,5 +12,5 @@ export const MenuBtn = styled.a`
   font-family: Raleway;
   z-index: 12;
   margin: 10px;
-
+  opacity: ${props => props.show ? '0' : '100'};
 `;
