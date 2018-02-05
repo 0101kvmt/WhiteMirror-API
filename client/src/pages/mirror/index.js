@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import styled from 'styled-components';
+import { connect } from 'react-redux';
 
 import { MirrorWrapper, MirrorTime, MirrorDate, MirrorTimeAMPM, MirrorToDo } from './../../components/Mirror';
 
@@ -8,6 +9,7 @@ class Mirror extends Component {
 
   constructor(props) {
     super(props);
+
     this.state = {
       menuHidden: true,
     };

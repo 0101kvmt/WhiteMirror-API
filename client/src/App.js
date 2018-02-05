@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { BrowserRouter, Route, Link } from 'react-router-dom';
 import styled, { injectGlobal } from 'styled-components';
-
+import { Provider } from 'react-redux';
+import store from './store';
 
 import Mirror from './pages/mirror';
 import Registration from './pages/registration';
@@ -12,15 +13,9 @@ import { Wrapper } from './components/Wrapper';
 import Nav from './components/Nav';
 
 class App extends Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      menuHidden: true,
-    };
-  }
   render() {
     return (
+      <Provider store={store}>
       <BrowserRouter>
         <Wrapper>
           <Nav />
@@ -30,6 +25,7 @@ class App extends Component {
 
         </Wrapper>
       </BrowserRouter>
+      </Provider>
 
     )
   }
