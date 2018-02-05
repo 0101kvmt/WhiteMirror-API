@@ -2,8 +2,9 @@ import React, { Component } from "react";
 import styled from 'styled-components';
 import { connect } from 'react-redux';
 
-import { MirrorWrapper, MirrorTime, MirrorDate, MirrorTimeAMPM, MirrorToDo } from './../../components/Mirror';
+import { MirrorWrapper, MirrorToDo } from './../../components/Mirror';
 import Time from './data/time';
+import Date from './data/date';
 
 class Mirror extends Component {
 
@@ -19,12 +20,10 @@ class Mirror extends Component {
     return (
       <MirrorWrapper>
 
-        <MirrorDate>Today, January 28, 2018</MirrorDate>
+        <Date/>
 
         <Time/>
-        <MirrorTime>08:54:03
-          <MirrorTimeAMPM>am</MirrorTimeAMPM>
-        </MirrorTime>
+
 
         <MirrorToDo> 3:00 PM You have a homework assignment due to Mrs. Johnsons Class </MirrorToDo>
         <MirrorToDo> 4:54 PM Do not forget to pick up the {this.state.color} Avocados!</MirrorToDo>

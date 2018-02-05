@@ -5,22 +5,22 @@ import Moment from 'react-moment';
 import moment from 'moment';
 import 'moment-timezone';
 
-import { MirrorTime, MirrorDate, MirrorTimeAMPM } from './../../../components/Mirror';
+import { MirrorDate } from './../../../components/Mirror';
 
-class Time extends Component {
+class Date extends Component {
 
   constructor(props) {
     super(props);
 
     this.state = {
-      currTime: moment(),
+      currDate: moment(),
     };
   }
 
   componentDidMount() {
     this.interval = setInterval(() => {
-      this.setState({currTime: moment()});
-    }, 1000);
+      this.setState({currDate: moment()});
+    }, 1000 * 60 * 60);
   }
 
   componentWillUnmount() {
@@ -28,15 +28,11 @@ class Time extends Component {
   }
 
   render() {
-    const currTime = this.state.currTime.format('h:mm:ss');
-    const currAMPM = this.state.currTime.format('a');
+    const currDate = 'Today, ' + this.state.currDate.format('MMMM Do YYYY');
     return (
-      <MirrorTime>
-        {currTime} <MirrorTimeAMPM> {currAMPM} </MirrorTimeAMPM>
-      </MirrorTime>
-
+      <MirrorDate> {currDate} </MirrorDate>
     );
   }
 }
 
-export default Time;
+export default Date;
