@@ -5,6 +5,7 @@ import { Provider } from 'react-redux';
 import store from './store';
 
 import Mirror from './pages/mirror';
+import Time from './pages/mirror/data/time';
 import Registration from './pages/registration';
 import Home from './pages/home';
 import Settings from './pages/settings';
@@ -21,6 +22,7 @@ class App extends Component {
           <Nav />
                <Route exact path="/" component={Home}/>
                <Route path="/mirror" component={Mirror}/>
+               <Route path="/time" component={Time}/>
                <Route path="/settings" component={Settings}/>
 
         </Wrapper>

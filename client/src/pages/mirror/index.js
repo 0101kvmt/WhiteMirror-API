@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { connect } from 'react-redux';
 
 import { MirrorWrapper, MirrorTime, MirrorDate, MirrorTimeAMPM, MirrorToDo } from './../../components/Mirror';
-
+import Time from './data/time';
 
 class Mirror extends Component {
 
@@ -21,6 +21,7 @@ class Mirror extends Component {
 
         <MirrorDate>Today, January 28, 2018</MirrorDate>
 
+        <Time/>
         <MirrorTime>08:54:03
           <MirrorTimeAMPM>am</MirrorTimeAMPM>
         </MirrorTime>
