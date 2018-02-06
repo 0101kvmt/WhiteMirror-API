@@ -19,7 +19,7 @@ export const getWeather = (longitude, latitude) => async (dispatch) => {
   dispatch({ type: FETCH_WEATHER_REQUEST })
     try {
       let { data } = await axios(weatherConfig.url, weatherConfig.config)
-      dispatch({ type: FETCH_WEATHER_SUCCESS, weather: data })
+      dispatch({ type: FETCH_WEATHER_SUCCESS, weather: data.data.Weather })
     } catch (err) {
       console.log(err);
       dispatch({ type: FETCH_WEATHER_FAILURE, errorMessage: err})

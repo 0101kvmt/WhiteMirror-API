@@ -12,18 +12,29 @@ class Weather extends Component {
     this.state = {
       weather: true,
     };
+    this.props.getWeather(37.3382080, -121.8863290);
   }
   componentDidMount() {
     console.log("weather mounto");
-    this.props.getWeather(37.3382080, -121.8863290);
+
   }
   render() {
-    console.log("props", this.props);
-    return (
-      <p>
-        Nice Weather eh?
-      </p>
-    );
+    if(!this.props.mirror.weather.currently){
+      return(
+        <p> loading.. </p>
+      );
+    } else {
+      console.log("props",this.props.mirror.weather.currently);
+      const icon = this.props.mirror.weather.currently.icon;
+      const temperature = this.props.mirror.weather.currently.temperature;
+      const summary = this.props.mirror.weather.currently.summary;
+      return (
+        <p>
+          Nice Weather eh? {icon}, {temperature}, {summary}
+
+        </p>
+      );
+    }
   }
 }
 
