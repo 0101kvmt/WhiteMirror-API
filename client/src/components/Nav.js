@@ -70,6 +70,7 @@ class Nav extends Component {
             <NavLink onClick = {this.menuClick.bind(this)}><Link style={{...LinkStyle}} to="/">Home</Link></NavLink>
             <NavLink onClick = {this.menuClick.bind(this)}><Link style={{...LinkStyle}} to="/mirror">Mirrors</Link></NavLink>
             <NavLink onClick = {this.menuClick.bind(this)}><Link style={{...LinkStyle}} to="/login">Settings</Link></NavLink>
+            <NavLink onClick = {this.menuClick.bind(this)}><Link style={{...LinkStyle}} to="/register">Login</Link></NavLink>
           </ul>
         </NavContainer>
       </WholeContainer>

@@ -9,7 +9,8 @@ import Time from './pages/mirror/data/time';
 import Registration from './pages/registration';
 import Home from './pages/home';
 import Settings from './pages/settings';
-import Login from './pages/login';
+import Login from './pages/auth/login';
+import Register from './pages/auth/register';
 
 import { Wrapper } from './components/Wrapper';
 import Nav from './components/Nav';
@@ -26,6 +27,7 @@ class App extends Component {
                <Route path="/time" component={Time}/>
                <Route path="/settings" component={Settings}/>
                <Route path="/login" component={Login}/>
+               <Route path="/register" component={Register}/>
         </Wrapper>
       </BrowserRouter>
       </Provider>
