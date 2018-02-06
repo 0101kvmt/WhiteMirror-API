@@ -17,12 +17,13 @@ export const MirrorTime = styled.p`
   color: white;
   font-size: 70px;
   margin: 0;
+  font-family: helvetica
 `;
 
 export const MirrorTimeAMPM = styled.p`
   display: inline-block;
   color: white;
-  font-size: 25px;
+  font-size: 20px;
   margin: 0;
 `;
 

@@ -5,6 +5,7 @@ import Moment from 'react-moment';
 import moment from 'moment';
 import 'moment-timezone';
 
+
 import { MirrorTime, MirrorDate, MirrorTimeAMPM } from './../../../components/Mirror';
 
 class Time extends Component {
@@ -21,6 +22,7 @@ class Time extends Component {
     this.interval = setInterval(() => {
       this.setState({currTime: moment()});
     }, 1000);
+
   }
 
   componentWillUnmount() {
@@ -32,7 +34,7 @@ class Time extends Component {
     const currAMPM = this.state.currTime.format('a');
     return (
       <MirrorTime>
-        {currTime} <MirrorTimeAMPM> {currAMPM} </MirrorTimeAMPM>
+        {currTime}<MirrorTimeAMPM> {currAMPM}</MirrorTimeAMPM>
       </MirrorTime>
 
     );

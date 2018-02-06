@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 import { MirrorWrapper, MirrorToDo } from './../../components/Mirror';
 import Time from './data/time';
 import Date from './data/date';
+import Weather from './data/weather';
 
 class Mirror extends Component {
 
@@ -19,7 +20,7 @@ class Mirror extends Component {
   render() {
     return (
       <MirrorWrapper>
-
+        <Weather/>
         <Date/>
 
         <Time/>
