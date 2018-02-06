@@ -1,15 +1,41 @@
 import React, { Component } from "react";
 import { connect } from 'react-redux';
 
-class Mirror extends Component {
+import { FormWrapper, Form, Input, InputButton } from './../../components/Form';
+
+import { CenterWrapper } from './../../components/Wrapper';
+class Login extends Component {
+  constructor(props){
+    super(props);
+    this.state = {
+      usernameText: '',
+      passwordText: ''
+    }
+  }
+  componentDidMount() {
+
+  }
+
+  handleUsernameText(e) {
+    console.log(this.state.usernameText);
+    this.setState({ usernameText: e.target.value});
+  }
+
   render() {
     return (
-      <div>
-        <h2>Login</h2>
+      <CenterWrapper>
+        <FormWrapper>
+          <h2>Login</h2>
+          <Form>
+            <Input type="text" placeholder="Username" onChange = { this.handleUsernameText.bind(this) } value={ this.state.usernameText } />
+            <Input type="text" placeholder="Password" />
+            <InputButton type="submit" />
+          </Form>
 
-      </div>
+        </FormWrapper>
+      </CenterWrapper>
     );
   }
 }
 
-export default Mirror;
+export default Login;

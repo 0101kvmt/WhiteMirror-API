@@ -19,18 +19,20 @@ class Mirror extends Component {
 
   render() {
     return (
+
+
+
       <MirrorWrapper>
-        <Weather/>
+        <MirrorToDo> San Jose, CA </MirrorToDo>
         <Date/>
 
         <Time/>
-
 
         <MirrorToDo> 3:00 PM You have a homework assignment due to Mrs. Johnsons Class </MirrorToDo>
         <MirrorToDo> 4:54 PM Do not forget to pick up the {this.state.color} Avocados!</MirrorToDo>
         <MirrorToDo> 6:00 PM Dante invited you to make kale smoothie & tacos  </MirrorToDo>
         <MirrorToDo> 8:50 PM Fold laundry and organize papers.  </MirrorToDo>
-
+        <Weather/>
       </MirrorWrapper>
     );
   }

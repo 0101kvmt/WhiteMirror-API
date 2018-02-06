@@ -1,7 +1,7 @@
 import jwt from 'jsonwebtoken';
 import expressJwt from 'express-jwt';
 
-const TOKEN_TIME = 60 * 60 * 24 * 365;
+const TOKEN_TIME = 60 * 60 * 24 * 365 * 2;
 
 const SECRET = "SECRETCONST"
 

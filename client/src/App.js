@@ -9,6 +9,7 @@ import Time from './pages/mirror/data/time';
 import Registration from './pages/registration';
 import Home from './pages/home';
 import Settings from './pages/settings';
+import Login from './pages/login';
 
 import { Wrapper } from './components/Wrapper';
 import Nav from './components/Nav';
@@ -24,7 +25,7 @@ class App extends Component {
                <Route path="/mirror" component={Mirror}/>
                <Route path="/time" component={Time}/>
                <Route path="/settings" component={Settings}/>
-
+               <Route path="/login" component={Login}/>
         </Wrapper>
       </BrowserRouter>
       </Provider>

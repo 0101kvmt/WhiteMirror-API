@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import { connect } from 'react-redux';
 import Skycons from 'react-skycons';
 
-import { MirrorWeatherIcon } from './../../../components/Mirror';
+import { MirrorWeatherIcon, MirrorWeather, MirrorWeatherContainer, MirrorWeathersContainer } from './../../../components/Mirror';
 
 import * as actions from './../action';
 
@@ -16,10 +16,10 @@ class Weather extends Component {
     this.state = {
       weather: true,
     };
-    this.props.getWeather(37.3382080, -121.8863290);
+
   }
   componentDidMount() {
-    console.log("weather mounto");
+    this.props.getWeather(37.3382080, -121.8863290);
 
   }
   render() {
@@ -29,20 +29,75 @@ class Weather extends Component {
       );
     } else {
       const replace = /-/i;
-      console.log("props",this.props.mirror.weather.currently);
       const icon = this.props.mirror.weather.currently.icon.replace(replace, "_").toUpperCase();
       const temperature = this.props.mirror.weather.currently.temperature;
       const summary = this.props.mirror.weather.currently.summary;
 
       return (
-        <MirrorWeatherIcon>
-          <Skycons
-           color='white'
-           icon={icon}
-           autoplay={true}
-           style={{ width: '100%', height: '100%'}}
-         />
-        </MirrorWeatherIcon>
+        <MirrorWeathersContainer>
+
+          <MirrorWeatherContainer>
+            <MirrorWeatherIcon>
+              <Skycons
+               color='white'
+               icon={icon}
+               autoplay={true}
+               style={{ width: '100%', height: '100%'}}
+               />
+            </MirrorWeatherIcon>
+
+              <MirrorWeather>
+                {temperature} °F;
+              </MirrorWeather>
+
+              <MirrorWeather>
+                {summary}
+              </MirrorWeather>
+
+          </MirrorWeatherContainer>
+
+          <MirrorWeatherContainer>
+            <MirrorWeatherIcon>
+              <Skycons
+               color='white'
+               icon="PARTLY_CLOUDY_DAY"
+               autoplay={true}
+               style={{ width: '100%', height: '100%'}}
+               />
+            </MirrorWeatherIcon>
+
+              <MirrorWeather>
+                {temperature} °F;
+              </MirrorWeather>
+
+              <MirrorWeather>
+                {summary}
+              </MirrorWeather>
+
+          </MirrorWeatherContainer>
+
+          <MirrorWeatherContainer>
+            <MirrorWeatherIcon>
+              <Skycons
+               color='white'
+               icon="SLEET"
+               autoplay={true}
+               style={{ width: '100%', height: '100%'}}
+               />
+            </MirrorWeatherIcon>
+
+              <MirrorWeather>
+                {temperature} °F;
+              </MirrorWeather>
+
+              <MirrorWeather>
+                {summary}
+              </MirrorWeather>
+
+          </MirrorWeatherContainer>
+
+        </MirrorWeathersContainer>
+
       );
     }
   }

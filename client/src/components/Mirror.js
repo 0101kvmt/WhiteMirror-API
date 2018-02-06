@@ -35,11 +35,25 @@ export const MirrorDate = styled.p`
 
 export const MirrorWeather = styled.p`
   color: white;
-  font-size: 25px;
+  font-size: 16px;
+  text-align: center;
+  margin: 0;
 `;
+
 export const MirrorWeatherIcon = styled.div`
   width: 90px;
   height: 45px;
+`;
+
+export const MirrorWeatherContainer = styled.div`
+  width: 90px;
+  height: 100px;
+  margin: 0;
+  display: inline-block;
+`;
+export const MirrorWeathersContainer = styled.div`
+  width: 270px;
+  height: 100px;
 `;
 
 export const MirrorToDo = styled.p`

@@ -15,7 +15,7 @@ export default({db}) => {
 
   api.get('/', (req, res) => {
     User.find({})
-    .populate([{path: 'mirror', populate: [{path: 'section'}, {path: 'option'}]}])    
+    .populate([{path: 'mirror', populate: [{path: 'section'}, {path: 'option'}]}])
     .exec()
     .then(users => {
       let userMap = {};
@@ -74,16 +74,14 @@ export default({db}) => {
         }
       }
 
-      if(res) {
-        console.log(res);
+      if(!err) {
+        passport.authenticate(
+          'local', {
+            session: false,
+            scope: []
+          }
+        ), generateAccessToken({user}, res)
       }
-
-      passport.authenticate(
-        'local', {
-          session: false,
-          scope: []
-        }
-      ), generateAccessToken({user}, res)
     });
   });
 
