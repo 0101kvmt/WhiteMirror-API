@@ -4,12 +4,12 @@ import { FETCH_WEATHER_FAILURE, FETCH_WEATHER_REQUEST, FETCH_WEATHER_SUCCESS } f
 
 import Config from './../../config.json';
 
-const apiUrl = "http://localhost:3131/" + Config.Weather_apiKey ;
+const apiUrl = "http://localhost:3131/v1/mirror/weather" ;
 
 export const getWeather = (longitude, latitude) => async (dispatch) => {
 
   const weatherConfig = {
-    url: apiUrl + longitude + ',' + latitude,
+    url: apiUrl,
     config: {
       headers: {"Access-Control-Allow-Origin": "*"}
     }
@@ -19,8 +19,9 @@ export const getWeather = (longitude, latitude) => async (dispatch) => {
   dispatch({ type: FETCH_WEATHER_REQUEST })
     try {
       let { data } = await axios(weatherConfig.url, weatherConfig.config)
-      dispatch({ type: FETCH_WEATHER_SUCCESS }, weather: data.data.weather)
+      dispatch({ type: FETCH_WEATHER_SUCCESS, weather: data })
     } catch (err) {
-      dispatch({ type: FETCH_WEATHER_FAILURE})
+      console.log(err);
+      dispatch({ type: FETCH_WEATHER_FAILURE, errorMessage: err})
     }
 };

@@ -39,9 +39,8 @@ export default({ db }) => {
     console.log(apiUrl);
 
     axios.get('https://api.darksky.net/forecast/de59a4e908bcf93e49df5a1761431480/37.338208,-121.886329')
-      .then(weatherz => {
-        let json = CircularJson.stringify(weatherz);
-        res.send(json)
+      .then(weather => {
+        res.status(200).send(defaultResponseModel(true, 'Got Weather', {Weather: weather.data}))
       })
       .catch(err => {
         res.status(404).send(defaultResponseModel(false, 'Weather failed to get: ' + err))

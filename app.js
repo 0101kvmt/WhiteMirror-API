@@ -40,6 +40,9 @@ app.use(cors({
 app.use(bodyParser.json());
 app.use(urlencoded_parser);
 
+app.use(express.static(__dirname + '/build'));
+
+
 ////////////////////////////////////////////////////////////
 //                   Passport Config                      //
 ////////////////////////////////////////////////////////////

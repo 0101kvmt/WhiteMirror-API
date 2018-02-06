@@ -2,6 +2,8 @@ import { FETCH_WEATHER_FAILURE, FETCH_WEATHER_REQUEST, FETCH_WEATHER_SUCCESS } f
 
 const INITIAL_STATE = {
   isRequesting: false,
+  errorMessage: '',
+  weather: {}
 }
 
 export default (state=INITIAL_STATE, action) => {
