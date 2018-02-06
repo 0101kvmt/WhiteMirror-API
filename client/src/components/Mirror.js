@@ -37,6 +37,10 @@ export const MirrorWeather = styled.p`
   color: white;
   font-size: 25px;
 `;
+export const MirrorWeatherIcon = styled.div`
+  width: 90px;
+  height: 45px;
+`;
 
 export const MirrorToDo = styled.p`
   color: white;
