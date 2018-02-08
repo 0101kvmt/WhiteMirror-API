@@ -34,7 +34,34 @@ let respond = (req, res) => {
   });
 };
 
+let verifyAuth = (req, res) => {
+  let token = req.params.id;
+  let secret = SECRET;
+  jwt.verify(token, secret, function(err, decoded) {
+    if(err) {
+      res.status(400).json({
+        status: 'Error!',
+        message: 'Access Token is invalid',
+        data: {
+          valid: false
+        }
+      })
+    } else {
+      console.log(req.token);
+      res.status(200).json({
+        status: 'Success!',
+        message: 'Access Token is valid',
+        data: {
+          decoded: decoded,
+          valid: true
+        }
+      });
+    }
+  });
+}
+
 module.exports = {
+  generateAccessToken,
   authenticate,
-  resond
+  respond
 }

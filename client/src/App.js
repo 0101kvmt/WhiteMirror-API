@@ -6,7 +6,6 @@ import store from './store';
 
 import Mirror from './pages/mirror';
 import Time from './pages/mirror/data/time';
-import Registration from './pages/registration';
 import Home from './pages/home';
 import Settings from './pages/settings';
 import Login from './pages/auth/login';

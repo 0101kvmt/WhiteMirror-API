@@ -6,6 +6,7 @@ import mirror from '../controllers/v1/mirror';
 import option from '../controllers/v1/option';
 import section from '../controllers/v1/section';
 import user from '../controllers/v1/user';
+import auth from '../controllers/v1/auth';
 
 let router = express();
 
@@ -18,6 +19,7 @@ initializeDb(db => {
   router.use('/option', option({db}));
   router.use('/section', section({db}));
   router.use('/user', user({db}));
+  router.use('/auth', auth({db}));
 });
 
 export default router;

@@ -4,7 +4,7 @@ const INITIAL_STATE = {
   errorMessage: '',
   isRequesting: false,
   isAuthenticated: false,
-  currentUser: {}
+  currentUser: ''
 };
 
 export default (state = INITIAL_STATE, action) => {
