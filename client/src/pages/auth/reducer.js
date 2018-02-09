@@ -3,8 +3,6 @@ import { NEWUSER_FAILURE, NEWUSER_REQUEST, NEWUSER_SUCCESS, AUTH_FAILURE, AUTH_R
 const INITIAL_STATE = {
   errorMessage: '',
   isRequesting: false,
-  isAuthenticated: false,
-  currentUser: ''
 };
 
 export default (state = INITIAL_STATE, action) => {
@@ -12,13 +10,13 @@ export default (state = INITIAL_STATE, action) => {
     case NEWUSER_REQUEST:
       return { ...state, isRequesting: true, isAuthenticated: false };
     case NEWUSER_SUCCESS:
-      return { ...state, isRequesting: false, isAuthenticated: true };
+      return { ...state, isRequesting: false, currentUser: action.currentUser, token: action.token, isAuthenticated: true };
     case NEWUSER_FAILURE:
       return { ...state, isRequesting: false, isAuthenticated: false};
     case AUTH_REQUEST:
       return { ...state, isRequesting: true, isAuthenticated: false };
     case AUTH_SUCCESS:
-      return { ...state, isRequesting: false, isAuthenticated: true };
+      return { ...state, isRequesting: false, currentUser: action.currentUser, isAuthenticated: true };
     case AUTH_FAILURE:
       return { ...state, isRequesting: false, isAuthenticated: false};
     default:

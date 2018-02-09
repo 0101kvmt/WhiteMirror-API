@@ -36,7 +36,7 @@ export const newUser = (username, password) => {
 export const authenticate = (username, password) => {
 
   const authConfiguration = {
-    url: apiUrl,
+    url: apiUrl + "auth",
     method: 'post',
     auth: {
       "username": username,
@@ -49,7 +49,7 @@ export const authenticate = (username, password) => {
     dispatch({ type: AUTH_REQUEST });
     return axios.post(authConfiguration.url, authConfiguration.auth)
       .then(res => {
-        dispatch({ type: AUTH_SUCCESS, currentUser: res.data.data.user});
+        dispatch({ type: AUTH_SUCCESS, currentUser: res.data.data.user, token: res.data.data.token});
       })
       .catch(err => {
         if(err.response){

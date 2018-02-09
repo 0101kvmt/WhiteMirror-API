@@ -3,7 +3,7 @@ import { AUTH_FAILURE, AUTH_REQUEST, AUTH_SUCCESS } from './types';
 const INITIAL_STATE = {
   errorMessage: '',
   isRequesting: false,
-  isAuthenticated: false
+  isAuthenticated: false,
 };
 
 export default (state = INITIAL_STATE, action) => {

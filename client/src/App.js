@@ -2,7 +2,10 @@ import React, { Component } from 'react';
 import { BrowserRouter, Route, Link } from 'react-router-dom';
 import styled, { injectGlobal } from 'styled-components';
 import { Provider } from 'react-redux';
-import store from './store';
+import { PersistGate } from 'redux-persist/integration/react';
+
+import { store, persistor } from './store';
+import { loadState, saveState } from './../localStorage.js';
 
 import Mirror from './pages/mirror';
 import Time from './pages/mirror/data/time';
@@ -18,6 +21,7 @@ class App extends Component {
   render() {
     return (
       <Provider store={store}>
+      <PersistGate loading={null} persistor={persistor}>
       <BrowserRouter>
         <Wrapper>
           <Nav />
@@ -29,6 +33,7 @@ class App extends Component {
                <Route path="/register" component={Register}/>
         </Wrapper>
       </BrowserRouter>
+      </PersistGate>
       </Provider>
 
     )

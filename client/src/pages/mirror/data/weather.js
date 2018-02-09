@@ -20,9 +20,6 @@ class Weather extends Component {
   }
   componentDidMount() {
     this.props.getWeather(37.3382080, -121.8863290);
-    if(!this.props.auth.currentUser) {
-      console.log("no");
-    }
 
   }
   render() {
