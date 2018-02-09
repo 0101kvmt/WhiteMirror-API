@@ -3,6 +3,7 @@ import { NEWUSER_FAILURE, NEWUSER_REQUEST, NEWUSER_SUCCESS, AUTH_FAILURE, AUTH_R
 const INITIAL_STATE = {
   errorMessage: '',
   isRequesting: false,
+  currentUser: null
 };
 
 export default (state = INITIAL_STATE, action) => {

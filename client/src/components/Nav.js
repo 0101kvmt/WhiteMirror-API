@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import { BrowserRouter, Route, Link } from 'react-router-dom';
 import styled from 'styled-components';
 
 import {MenuBtn} from './Menubtn';
+import * as actions from './../pages/auth/actions';
 
 const NavContainer = styled.div`
   position: absolute;
@@ -22,7 +24,7 @@ const NavLink = styled.div`
   text-decoration: none;
   font-size: 25px;
   color: ${props => props.hover ? 'red' : 'blue'};
-  display: block;
+  display: ${props => props.hidden ? 'none' : 'block'};
   opacity: 100;
   transition: 1s;
 `;
@@ -44,6 +46,10 @@ const LinkStyle = {
 
 }
 
+
+// Nav Component
+
+
 class Nav extends Component {
 
   constructor(props) {
@@ -51,6 +57,7 @@ class Nav extends Component {
 
     this.state = {
       menuHidden: true,
+      linkHidden:  this.props.auth.currentUser == null ? false : true
     };
   }
 
@@ -69,13 +76,20 @@ class Nav extends Component {
           <ul>
             <NavLink onClick = {this.menuClick.bind(this)}><Link style={{...LinkStyle}} to="/">Home</Link></NavLink>
             <NavLink onClick = {this.menuClick.bind(this)}><Link style={{...LinkStyle}} to="/mirror">Mirrors</Link></NavLink>
-            <NavLink onClick = {this.menuClick.bind(this)}><Link style={{...LinkStyle}} to="/login">Settings</Link></NavLink>
-            <NavLink onClick = {this.menuClick.bind(this)}><Link style={{...LinkStyle}} to="/register">Login</Link></NavLink>
+            <NavLink hidden={this.state.linkHidden} onClick = {this.menuClick.bind(this)}><Link style={{...LinkStyle}} to="/login">Login</Link></NavLink>
+            <NavLink hidden={this.state.linkHidden} onClick = {this.menuClick.bind(this)}><Link style={{...LinkStyle}} to="/register">Register</Link></NavLink>
+            <NavLink hidden={!this.state.linkHidden} onClick = {this.menuClick.bind(this)}><Link style={{...LinkStyle}} to="/">Logout</Link></NavLink>
           </ul>
         </NavContainer>
       </WholeContainer>
     );
   }
 }
+const mapStateToProps = ({ auth }) => {
+  return {
+    auth
+  }
+}
 
-export default Nav;
+
+export default connect(mapStateToProps, { ...actions })(Nav);
