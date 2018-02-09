@@ -31,6 +31,8 @@ export default({ db }) => {
 
   api.post('/', (req, res) => {
 
+    console.log("req", req.body);
+
     const option = new Option({
       enum: req.body.enum,
       font: req.body.font,
@@ -38,10 +40,17 @@ export default({ db }) => {
       padding: req.body.padding
     })
 
+    console.log("user", req.body.user);
+
+    console.log("section", req.body.sectionName);
+
     option.save()
       .then(() => {
+
+        console.log("section2", req.body.sectionName);
+
         const section = new Section({
-          sectionName: req.body.sectionName,
+          sectionName: "req.body.sectionName",
           options: option._id
         })
 
@@ -58,11 +67,20 @@ export default({ db }) => {
                 User.update({_id: req.body.user}, { $push: { mirror: mirror._id }})
                   .exec();
               })
+              .catch(err => {
+                res.status(404).send(defaultResponseModel(false, 'Mirror failed to post: ' + err));
+              })
+          })
+          .catch(err => {
+            res.status(404).send(defaultResponseModel(false, 'Section failed to post: ' + err));
           })
 
       })
+      .catch(err => {
+        res.status(404).send(defaultResponseModel(false, 'Option failed to post: ' + err));
+      })
 
-  })
+  });
 
   ////////////////////////////////////////////////////////////
   //                       PUT '/'                          //

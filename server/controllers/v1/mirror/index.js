@@ -12,6 +12,10 @@ export default({ db }) => {
 
   const CircularJson = require('circular-json');
 
+  ////////////////////////////////////////////////////////////
+  //                       GET '/'                          //
+  ////////////////////////////////////////////////////////////
+
   api.get('/', (req, res) => {
     Mirror.find({})
       .populate({
@@ -30,6 +34,42 @@ export default({ db }) => {
       })
   });
 
+  ////////////////////////////////////////////////////////////
+  //                      GET '/:id'                        //
+  ////////////////////////////////////////////////////////////
+
+  api.get('/:id', (req, res, next) => {
+    Mirror.findById({ _id: req.params.id })
+      .populate({
+        path: 'section',
+        populate: {
+          path: 'options',
+          model: 'Option'
+        }
+      })
+      .exec()
+      .then(mirror => {
+        res.status(200).send(defaultResponseModel(true, 'Mirror has been succesfully found.', {mirror: mirror}));
+      })
+      .catch(err => {
+        res.status(404).send(defaultResponseModel(false, 'Mirror does not exist in Database'));
+        return next();
+      })
+  });
+
+
+  ////////////////////////////////////////////////////////////
+  //                       POST '/'                         //
+  ////////////////////////////////////////////////////////////
+
+  api.post('/', (req, res) => {
+
+  });
+
+  ////////////////////////////////////////////////////////////
+  //                   GET '/weather'                       //
+  ////////////////////////////////////////////////////////////
+
   api.get('/weather', (req, res) => {
 
     const headers = {"Access-Control-Allow-Origin": "*"};
@@ -47,10 +87,6 @@ export default({ db }) => {
       })
   });
 
-  api.post('/', (req, res) => {
-
-  })
-
-    return api;
+  return api;
 
 }
