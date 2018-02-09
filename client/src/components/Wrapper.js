@@ -20,3 +20,8 @@ export const CenterWrapper = styled.div`
   background-color: black;
   z-index: 19;
 `;
+
+export const HorizontalRowWrapper = styled.div`
+  display: flex;
+  flex-wrap: nowrap;
+`;

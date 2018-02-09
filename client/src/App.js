@@ -7,7 +7,7 @@ import { PersistGate } from 'redux-persist/integration/react';
 import { store, persistor } from './store';
 import { loadState, saveState } from './../localStorage.js';
 
-import Mirror from './pages/mirror';
+import MirrorList from './pages/mirror/mirrorList';
 import Time from './pages/mirror/data/time';
 import Home from './pages/home';
 import Settings from './pages/settings';
@@ -26,7 +26,7 @@ class App extends Component {
         <Wrapper>
           <Nav />
                <Route exact path="/" component={Home}/>
-               <Route path="/mirror" component={Mirror}/>
+               <Route path="/mirrorlist" component={MirrorList}/>
                <Route path="/time" component={Time}/>
                <Route path="/settings" component={Settings}/>
                <Route path="/login" component={Login}/>

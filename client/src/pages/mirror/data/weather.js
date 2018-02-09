@@ -101,12 +101,12 @@ class Weather extends Component {
       );
     }
   }
-}
+};
 
 const mapStateToProps = ({ mirror }) => {
   return {
     mirror
   }
-}
+};
 
 export default connect(mapStateToProps, { ...actions })(Weather);

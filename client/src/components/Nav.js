@@ -75,7 +75,7 @@ class Nav extends Component {
         <NavContainer hidden={this.state.menuHidden}>
           <ul>
             <NavLink onClick = {this.menuClick.bind(this)}><Link style={{...LinkStyle}} to="/">Home</Link></NavLink>
-            <NavLink onClick = {this.menuClick.bind(this)}><Link style={{...LinkStyle}} to="/mirror">Mirrors</Link></NavLink>
+            <NavLink hidden={!this.state.linkHidden} onClick = {this.menuClick.bind(this)}><Link style={{...LinkStyle}} to="/mirrorlist">Mirrors</Link></NavLink>
             <NavLink hidden={this.state.linkHidden} onClick = {this.menuClick.bind(this)}><Link style={{...LinkStyle}} to="/login">Login</Link></NavLink>
             <NavLink hidden={this.state.linkHidden} onClick = {this.menuClick.bind(this)}><Link style={{...LinkStyle}} to="/register">Register</Link></NavLink>
             <NavLink hidden={!this.state.linkHidden} onClick = {this.menuClick.bind(this)}><Link style={{...LinkStyle}} to="/">Logout</Link></NavLink>

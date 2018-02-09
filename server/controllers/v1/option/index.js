@@ -6,7 +6,8 @@ import User from './../../../models/user';
 
 import { defaultResponseModel } from './../../../utils/response';
 
-export default({ db }) => {
+export default({db}) => {
+
   let api = Router();
 
   ////////////////////////////////////////////////////////////
@@ -50,7 +51,7 @@ export default({ db }) => {
         console.log("section2", req.body.sectionName);
 
         const section = new Section({
-          sectionName: "req.body.sectionName",
+          sectionName: req.body.sectionName,
           options: option._id
         })
 
