@@ -20,10 +20,8 @@ class Mirror extends Component {
   render() {
     return (
 
-
-
       <MirrorWrapper>
-        <MirrorToDo> San Jose, CA </MirrorToDo>
+
         <Date/>
 
         <Time/>

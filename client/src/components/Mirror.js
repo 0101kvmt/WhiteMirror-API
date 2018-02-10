@@ -4,7 +4,7 @@ export const MirrorWrapper = styled.div`
   color: white;
   text-align: right;
   margin: 0px 10px 0px 0px;
-  width: 300px;
+  width: 320px;
   float: right;
 `;
 export const MSection = styled.div`
@@ -23,7 +23,7 @@ export const MirrorTime = styled.p`
 export const MirrorTimeAMPM = styled.p`
   display: inline-block;
   color: white;
-  font-size: 20px;
+  font-size: 17px;
   margin: 0;
 `;
 

@@ -42,6 +42,10 @@ export const spec = swaggerJSDoc({
         name: 'Option',
         description: 'Section\'s Options'
       },
+      {
+        name: 'ToDo',
+        description: 'Todo\'s Lists'
+      },
     ]
   },
   apis: [
@@ -49,6 +53,7 @@ export const spec = swaggerJSDoc({
     './server/controllers/v1/mirror/docs.js',
     './server/controllers/v1/section/docs.js',
     './server/controllers/v1/option/docs.js',
+    './server/controllers/v1/toDo/docs.js',
   ],
 
 });

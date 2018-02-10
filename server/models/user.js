@@ -22,6 +22,10 @@ let UserSchema = new Schema({
       ref: 'Mirror'
     }
   ],
+  toDoList: [{
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'toDo'
+  }],
   createdDate: {
     type: Date,
     default: Date.now

@@ -11,7 +11,7 @@ let SectionSchema = new Schema({
   options: [{
     type: mongoose.Schema.Types.ObjectId,
     ref: 'Option'
-  }]
+  }],
 })
 
 module.exports = mongoose.model('Section', SectionSchema);
