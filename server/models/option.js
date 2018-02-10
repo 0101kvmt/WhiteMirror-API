@@ -2,11 +2,11 @@ import mongoose from 'mongoose';
 
 let Schema = mongoose.Schema;
 
-const options = ['Weather', 'Time', 'Icon', 'To-do', 'Quotes', 'News', 'Twitter'];
+const options = ['Weather', 'Time', 'Date', 'Icon', 'To-do', 'Quotes', 'News', 'Twitter'];
 
 
 let OptionSchema = new Schema({
-  option1: {
+  option: {
      type: String,
      enum: options
     },

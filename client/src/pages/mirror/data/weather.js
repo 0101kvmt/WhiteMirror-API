@@ -28,7 +28,7 @@ class Weather extends Component {
         <p> loading.. </p>
       );
     } else {
-      const replace = /-/i;
+      const replace = /-/g;
       const icon = this.props.mirror.weather.currently.icon.replace(replace, "_").toUpperCase();
       const temperature = this.props.mirror.weather.currently.temperature;
       const summary = this.props.mirror.weather.currently.summary;

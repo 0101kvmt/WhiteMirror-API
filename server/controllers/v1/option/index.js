@@ -35,7 +35,7 @@ export default({db}) => {
     console.log("req", req.body);
 
     const option = new Option({
-      enum: req.body.enum,
+      option: req.body.enum,
       font: req.body.font,
       fontSize: req.body.fontSize,
       padding: req.body.padding
@@ -51,7 +51,7 @@ export default({db}) => {
         console.log("section2", req.body.sectionName);
 
         const section = new Section({
-          sectionName: req.body.sectionName,
+          sectionName: "req.body.sectionName",
           options: option._id
         })
 

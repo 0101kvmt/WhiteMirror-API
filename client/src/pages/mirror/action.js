@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-import { MIRROR_GET_FAILURE, MIRROR_GET_REQUEST, MIRROR_GET_SUCCESS, FETCH_WEATHER_FAILURE, FETCH_WEATHER_REQUEST, FETCH_WEATHER_SUCCESS,  } from './types';
+import { MIRROR_POST_FAILURE, MIRROR_POST_REQUEST, MIRROR_POST_SUCCESS, MIRROR_GET_FAILURE, MIRROR_GET_REQUEST, MIRROR_GET_SUCCESS, FETCH_WEATHER_FAILURE, FETCH_WEATHER_REQUEST, FETCH_WEATHER_SUCCESS,  } from './types';
 
 import Config from './../../config.json';
 
@@ -13,6 +13,38 @@ export const MirrorGet = (mirrorId) => {
     url: apiUrl + "mirror/" + mirrorId,
     method: 'get',
     mirror: {}
+  }
+
+  return dispatch => {
+    dispatch({ type: MIRROR_GET_REQUEST });
+    return axios.get(mirrorConfiguration.url)
+      .then(res => {
+        dispatch({ type: MIRROR_GET_SUCCESS, mirror: res.data.data.mirror});
+      })
+      .catch(err => {
+        if(err.response){
+          dispatch({ type: MIRROR_GET_FAILURE, errorMessage: err.response});
+        }
+        else{
+          dispatch({ type: MIRROR_GET_FAILURE, errorMessage: 'Cannot connect to server. Please try again.'});
+        }
+      })
+  }
+};
+
+export const MirrorPost = (userId, option1, font, fontSize, padding, sectionName) => {
+
+  const mirrorConfiguration = {
+    url: apiUrl + "option/",
+    method: 'post',
+    option: {
+	    "user": user,
+      "option1": option1,
+      "font": font,
+      "fontSize": fontSize,
+      "padding": padding,
+      "sectionName": sectionName
+    }
   }
 
   return dispatch => {

@@ -19,33 +19,52 @@ class MirrorList extends Component {
   componentDidMount(){
 
   };
-  renderMirrors() {
-      return(
-        <CenterWrapper>
-          <HorizontalRowWrapper>
-            {this.props.auth.currentUser.mirror.map((m, i) => {
-              <MirrorBox onClick={this.viewMirror.bind(this)} > {m._id} </MirrorBox>
-            })}
-            <MirrorBox onClick={this.addMirror.bind(this)} > add me </MirrorBox>
-            </HorizontalRowWrapper>
-      </CenterWrapper>
-      )
-  }
+
+  // functions
+
   viewMirror() {
     console.log("Mirror Viewed");
   }
   addMirror() {
-    console.log("Mirror Added");
+    this.props.mirrorPost();
   }
+
+  // render functions
+
+  renderMirrors(mirrorList) {
+
+      return(
+
+        <CenterWrapper>
+          <HorizontalRowWrapper >
+            {mirrorList.map((m, i) => {
+              <MirrorBox onClick={this.viewMirror.bind(this)} > {m._id} </MirrorBox>
+            })}
+            {this.renderAddMirrors()}
+          </HorizontalRowWrapper>
+      </CenterWrapper>
+
+      )
+  }
+  renderAddMirrors(){
+    if(this.props.auth.currentUser.mirror.length <= 5) {
+      return(
+        <MirrorBox onClick={this.addMirror.bind(this)} > add me </MirrorBox>
+      )
+    }
+  }
+
+  //render
+
   render() {
-    console.log("mirror List", this.props);
-
-
+    const mirrorList = this.props.auth.currentUser.mirror;
     return (
-      this.renderMirrors()
+      this.renderMirrors(mirrorList)
     );
   }
 }
+
+// mapStateToProps
 
 const mapStateToProps = ({ auth, mirror }) => {
   return {

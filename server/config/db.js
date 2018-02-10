@@ -12,7 +12,7 @@ import Option from './../models/option';
 
 let dbURI = "mongodb://localhost/WhiteMirror" || process.env.MONGODB_URI;
 
-console.log(Option.schema.path('option1').enumValues);
+console.log(Option.schema.path('option').enumValues);
 
 ////////////////////////////////////////////////////////////
 //                 Passport User Set-up                   //
