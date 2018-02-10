@@ -39,7 +39,30 @@ export default ({ db }) => {
         })
   });
 
+  ////////////////////////////////////////////////////////////
+  //                       POST '/'                         //
+  ////////////////////////////////////////////////////////////
 
+
+  api.post('/', (req, res) => {
+    let section = new Section({
+      sectionName: req.body.sectionName || "Section",
+      options: []
+    });
+
+    section.save()
+      .then(section => {
+        res.status(200).send(defaultResponseModel(true,'Option created', {option_id: option._id}));
+        User.update({_id: req.body.user}, { $push: { mirror: mirror._id }})
+        .exec();
+      })
+      .catch(err => {
+        res.status(404).send(defaultResponseModel(false, 'Failed to create Section.'));
+      })
+
+
+
+  })
   ////////////////////////////////////////////////////////////
   //                       PUT '/'                          //
   ////////////////////////////////////////////////////////////

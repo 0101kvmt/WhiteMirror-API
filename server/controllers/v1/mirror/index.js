@@ -63,8 +63,25 @@ export default({ db }) => {
   ////////////////////////////////////////////////////////////
 
   api.post('/', (req, res) => {
+    let mirror = new Mirror({
+      location: req.body.location,
+      section: [],
+    });
 
-  });
+    mirror.save()
+      .then(mirror => {
+        res.status(200).send(defaultResponseModel(true,'Mirror created', {mirror: mirror._id}));
+        User.update({_id: req.body.user}, { $push: { mirror: mirror._id }})
+        .exec();
+      })
+      .catch(err => {
+        res.status(404).send(defaultResponseModel(false, 'Failed to create Section.'));
+      })
+
+
+
+  })
+  ////////
 
   ////////////////////////////////////////////////////////////
   //                   GET '/weather'                       //

@@ -43,39 +43,11 @@ export default({db}) => {
 
     console.log("user", req.body.user);
 
-    console.log("section", req.body.sectionName);
-
     option.save()
-      .then(() => {
-
-        console.log("section2", req.body.sectionName);
-
-        const section = new Section({
-          sectionName: "req.body.sectionName",
-          options: option._id
-        })
-
-        section.save()
-          .then(() => {
-            const mirror = new Mirror({
-              section: section._id
-            })
-
-            mirror.save()
-              .then(() => {
-                console.log("mirrorzzzz", mirror);
-                res.status(200).send(defaultResponseModel(true,'Option created', {option_id: option._id}));
-                User.update({_id: req.body.user}, { $push: { mirror: mirror._id }})
-                  .exec();
-              })
-              .catch(err => {
-                res.status(404).send(defaultResponseModel(false, 'Mirror failed to post: ' + err));
-              })
-          })
-          .catch(err => {
-            res.status(404).send(defaultResponseModel(false, 'Section failed to post: ' + err));
-          })
-
+      .then((option) => {
+        res.status(200).send(defaultResponseModel(true,'Option created', {option_id: option._id}));
+        Section.update({_id: req.body.section}, { $push: { options: option._id }})
+        .exec();
       })
       .catch(err => {
         res.status(404).send(defaultResponseModel(false, 'Option failed to post: ' + err));

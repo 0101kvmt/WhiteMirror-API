@@ -4,7 +4,6 @@ let Schema = mongoose.Schema;
 
 const options = ['Weather', 'Time', 'Date', 'Icon', 'To-do', 'Quotes', 'News', 'Twitter'];
 
-
 let OptionSchema = new Schema({
   option: {
      type: String,

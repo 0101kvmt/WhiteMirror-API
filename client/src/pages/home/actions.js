@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-import { AUTH_FAILURE, AUTH_REQUEST, AUTH_SUCCESS } from './types';
+import { UPDATE_LOCATION_SUCCESS, UPDATE_LOCATION_REQUEST, UPDATE_LOCATION_FAILURE } from './types';
 
 const apiUrl = "localhost:3131/user"
 
