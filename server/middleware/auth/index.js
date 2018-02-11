@@ -63,5 +63,6 @@ let verifyAuth = (req, res) => {
 module.exports = {
   generateAccessToken,
   authenticate,
-  respond
+  respond,
+  verifyAuth
 }

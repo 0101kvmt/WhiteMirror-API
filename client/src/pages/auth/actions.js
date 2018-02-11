@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-import { LOGOUT_SUCCESS, NEWUSER_FAILURE, NEWUSER_REQUEST, NEWUSER_SUCCESS, AUTH_FAILURE, AUTH_REQUEST, AUTH_SUCCESS } from './types';
+import { VALIDATE_TOKEN_REQUEST, VALIDATE_TOKEN_SUCCESS, VALIDATE_TOKEN_FAILURE, LOGOUT_SUCCESS, NEWUSER_FAILURE, NEWUSER_REQUEST, NEWUSER_SUCCESS, AUTH_FAILURE, AUTH_REQUEST, AUTH_SUCCESS } from './types';
 
 const apiUrl = "http://localhost:3131/v1/" ;
 
@@ -32,6 +32,7 @@ export const newUser = (username, password) => {
       })
   }
 };
+
 
 export const logOut = () => {
   return dispatch => {
@@ -65,5 +66,21 @@ export const authenticate = (username, password) => {
           dispatch({ type: AUTH_FAILURE, errorMessage: 'Cannot connect to server. Please try again.'});
         }
       })
+  }
+};
+
+export const validateToken = authToken => async (dispatch) => {
+  const tokenConfig = {
+    url: apiUrl + 'verify/' + authToken,
+    config:
+      { headers: {'Authorization': 'Bearer ' + authToken}}
+  }
+
+  dispatch({ type: VALIDATE_TOKEN_REQUEST });
+  try {
+    let { data } = await axios(tokenConfig.url, tokenConfig.config);
+    dispatch({ type: VALIDATE_TOKEN_SUCCESS, validToken: data.data.valid, token: authToken, tokenUser: data.data.decoded })
+  } catch (err) {
+    dispatch({ type: VALIDATE_TOKEN_FAILURE, errorMessage: err.response })
   }
 };

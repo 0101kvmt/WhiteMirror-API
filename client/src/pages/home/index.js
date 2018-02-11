@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import styled from 'styled-components';
 
-import * as actions from './actions';
+import * as actions from './../auth/actions';
 
 import Mirror from './../mirror';
 
@@ -17,6 +17,9 @@ class Home extends Component {
     };
   }
   componentDidMount() {
+    if(!this.props.auth.token == ''){
+      this.props.validateToken(this.props.auth.token);
+    }
 
   }
 
@@ -28,8 +31,9 @@ class Home extends Component {
     );
   }
 }
-const mapStateToProps = ({ mirror }) => {
+const mapStateToProps = ({ auth, mirror }) => {
   return {
+    auth,
     mirror
   }
 }

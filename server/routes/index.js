@@ -9,6 +9,7 @@ import section from '../controllers/v1/section';
 import toDo from '../controllers/v1/toDo';
 import user from '../controllers/v1/user';
 import auth from '../controllers/v1/auth';
+import verify from '../controllers/v1/verify';
 
 let router = express();
 
@@ -24,6 +25,7 @@ initializeDb(db => {
   router.use('/user', user({db}));
   router.use('/auth', auth({db}));
   router.use('/toDo', toDo({db}));
+  router.use('/verify', verify({db}));
 });
 
 export default router;
