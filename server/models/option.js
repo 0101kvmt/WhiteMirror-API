@@ -15,7 +15,7 @@ let OptionSchema = new Schema({
   },
   fontSize: {
     type: Number,
-    default: 12
+    default: 26
   },
   padding: {
     type: Number,

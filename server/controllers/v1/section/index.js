@@ -1,9 +1,11 @@
 import { Router } from 'express';
 import Section from './../../../models/section';
+import Option from './../../../models/option';
+import Mirror from './../../../models/mirror';
 
 import { defaultResponseModel } from './../../../utils/response';
 
-export default ({ db }) => {
+export default ({db}) => {
   let api = Router();
 
   ////////////////////////////////////////////////////////////
@@ -51,13 +53,28 @@ export default ({ db }) => {
     });
 
     section.save()
-      .then(section => {
-        res.status(200).send(defaultResponseModel(true,'Option created', {option_id: option._id}));
-        User.update({_id: req.body.user}, { $push: { mirror: mirror._id }})
+      .then((section) => {
+
+        Mirror.update({_id: req.body.mirrorId}, { $push: { section: section._id }})
         .exec();
+
+        const option = new Option({
+          option: req.body.enum,
+          font: req.body.font,
+          fontSize: req.body.fontSize,
+          padding: req.body.padding
+        })
+
+
+        option.save();
+
+        res.status(200).send(defaultResponseModel(true,'Section created', {section: section}));
+            Section.update({_id: req.body.section}, { $push: { options: option._id }})
+            .exec();
+
       })
       .catch(err => {
-        res.status(404).send(defaultResponseModel(false, 'Failed to create Section.'));
+        res.status(404).send(defaultResponseModel(false, 'Section failed to post: ' + err));
       })
 
 

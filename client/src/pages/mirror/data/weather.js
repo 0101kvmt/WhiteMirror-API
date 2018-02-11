@@ -14,20 +14,37 @@ class Weather extends Component {
     super(props);
 
     this.state = {
-      weather: true,
+      weather: false,
     };
 
   }
   componentDidMount() {
-    this.props.getWeather(37.3382080, -121.8863290);
+    this.props.getWeather(37.338208 , -121.88);
 
   }
+
+  getLocation() {
+      if ("geolocation" in navigator) {
+        navigator.geolocation.getCurrentPosition(function(position) {
+
+
+        console.log("latitudestate", position.coords.latitude);
+        console.log("longitudestate", position.coords.longitude);
+        this.props.getWeather(position.coords.latitude, position.coords.longitude);
+        });
+      } else {
+        console.log("failed to geolocate");
+      }
+  }
+
+
   render() {
     if(!this.props.mirror.weather.currently){
       return(
         <p> loading.. </p>
       );
     } else {
+
       const replace = /-/g;
       const icon = this.props.mirror.weather.currently.icon.replace(replace, "_").toUpperCase();
       const temperature = this.props.mirror.weather.currently.temperature;

@@ -8,7 +8,7 @@ let MirrorSchema = new Schema({
     [{
       type: mongoose.Schema.Types.ObjectId,
       ref:'Section'
-    }]
+    }],
     // ,
     // validate: [arrayLimit, '{PATH} exceeds the limit of 5']
   // }

@@ -12,8 +12,13 @@ class MirrorList extends Component {
 
   constructor(props) {
     super(props);
+    {
 
+        }
     this.state = {
+      user: this.props.auth.currentUser._id,
+      options: ['Date', 'Time', 'To-do', 'Weather'],
+      sectionName: "sectionName"
     };
   }
   componentDidMount(){
@@ -26,20 +31,31 @@ class MirrorList extends Component {
     console.log("Mirror Viewed");
   }
   addMirror() {
-    this.props.mirrorPost();
+
+    this.props.MirrorPost(this.state.user)
+      .then(() => {
+        this.state.options.forEach((o, i) => {
+          this.props.SectionPost(this.state.user, this.state.sectionName + i, o, this.props.mirror.mirror._id);
+        });
+      })
+  }
+  addSection(){
+    this.props.SectionPost()
   }
 
   // render functions
 
   renderMirrors(mirrorList) {
 
-      return(
+      return (
 
         <CenterWrapper>
           <HorizontalRowWrapper >
+
             {mirrorList.map((m, i) => {
               <MirrorBox onClick={this.viewMirror.bind(this)} > {m._id} </MirrorBox>
             })}
+
             {this.renderAddMirrors()}
           </HorizontalRowWrapper>
       </CenterWrapper>

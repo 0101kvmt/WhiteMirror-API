@@ -1,10 +1,10 @@
 import axios from 'axios';
 
-import { MIRROR_POST_FAILURE, MIRROR_POST_REQUEST, MIRROR_POST_SUCCESS, MIRROR_GET_FAILURE, MIRROR_GET_REQUEST, MIRROR_GET_SUCCESS, FETCH_WEATHER_FAILURE, FETCH_WEATHER_REQUEST, FETCH_WEATHER_SUCCESS,  } from './types';
+import { SECTION_POST_FAILURE, SECTION_POST_REQUEST, SECTION_POST_SUCCESS, MIRROR_POST_FAILURE, MIRROR_POST_REQUEST, MIRROR_POST_SUCCESS, MIRROR_GET_FAILURE, MIRROR_GET_REQUEST, MIRROR_GET_SUCCESS, FETCH_WEATHER_FAILURE, FETCH_WEATHER_REQUEST, FETCH_WEATHER_SUCCESS,  } from './types';
 
 import Config from './../../config.json';
 
-const apiUrl = "http://localhost:3131/v1/mirror/" ;
+const apiUrl = "http://localhost:3131/v1/" ;
 
 
 export const MirrorGet = (mirrorId) => {
@@ -19,7 +19,7 @@ export const MirrorGet = (mirrorId) => {
     dispatch({ type: MIRROR_GET_REQUEST });
     return axios.get(mirrorConfiguration.url)
       .then(res => {
-        dispatch({ type: MIRROR_GET_SUCCESS, mirror: res.data.data.mirror});
+        dispatch({ type: MIRROR_GET_SUCCESS, mirror: res.data.data.mirror,  errorMessage: ''});
       })
       .catch(err => {
         if(err.response){
@@ -35,39 +35,70 @@ export const MirrorGet = (mirrorId) => {
 export const MirrorPost = (userId, option1, font, fontSize, padding, sectionName) => {
 
   const mirrorConfiguration = {
-    url: apiUrl + "option/",
+    url: apiUrl + "mirror",
     method: 'post',
-    option: {
-	    "user": user,
-      "option1": option1,
-      "font": font,
-      "fontSize": fontSize,
-      "padding": padding,
-      "sectionName": sectionName
+    mirror: {
+
     }
   }
 
   return dispatch => {
-    dispatch({ type: MIRROR_GET_REQUEST });
-    return axios.get(mirrorConfiguration.url)
+    dispatch({ type: MIRROR_POST_REQUEST });
+    return axios.post(mirrorConfiguration.url)
       .then(res => {
-        dispatch({ type: MIRROR_GET_SUCCESS, mirror: res.data.data.mirror});
+        dispatch({ type: MIRROR_POST_SUCCESS, mirror: res.data.data.mirror,  errorMessage: ''});
       })
       .catch(err => {
         if(err.response){
-          dispatch({ type: MIRROR_GET_FAILURE, errorMessage: err.response});
+          dispatch({ type: MIRROR_POST_FAILURE, errorMessage: err.response});
         }
         else{
-          dispatch({ type: MIRROR_GET_FAILURE, errorMessage: 'Cannot connect to server. Please try again.'});
+          dispatch({ type: MIRROR_POST_FAILURE, errorMessage: 'Cannot connect to server. Please try again.'});
         }
       })
   }
 };
 
-export const getWeather = (longitude, latitude) => async (dispatch) => {
+export const SectionPost = (userId, sectionName, option, mirrorId) => {
+
+  const sectionConfiguration = {
+    url: apiUrl + "section/",
+    method: 'post',
+    section: {
+      userId: userId,
+      sectionName: sectionName,
+      mirrorId: mirrorId,
+      enum: option
+    }
+  }
+
+  return dispatch => {
+    dispatch({ type: SECTION_POST_REQUEST });
+    return axios.post(sectionConfiguration.url, sectionConfiguration.section)
+      .then(res => {
+        dispatch({ type: SECTION_POST_SUCCESS, section: res.data.data.section, errorMessage: ''});
+      })
+      .catch(err => {
+        if(err.response){
+          dispatch({ type: SECTION_POST_FAILURE, errorMessage: err.response});
+        }
+        else{
+          dispatch({ type: SECTION_POST_FAILURE, errorMessage: 'Cannot connect to server. Please try again.'});
+        }
+      })
+  }
+};
+
+
+export const getWeather = (latitude, longitude) => async (dispatch) => {
 
   const weatherConfig = {
     url: apiUrl + "weather/w",
+    method: 'post',
+    weather: {
+      longitude: longitude,
+      latitude: latitude
+    },
     config: {
       headers: {"Access-Control-Allow-Origin": "*"}
     }
@@ -76,7 +107,7 @@ export const getWeather = (longitude, latitude) => async (dispatch) => {
 
   dispatch({ type: FETCH_WEATHER_REQUEST })
     try {
-      let { data } = await axios(weatherConfig.url, weatherConfig.config)
+      let { data } = await axios.post(weatherConfig.url, weatherConfig.weather)
       dispatch({ type: FETCH_WEATHER_SUCCESS, weather: data.data.Weather })
     } catch (err) {
       console.log(err);

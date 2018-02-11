@@ -84,12 +84,12 @@ class Nav extends Component {
       </WholeContainer>
     );
   }
-}
+};
 const mapStateToProps = ({ auth }) => {
   return {
     auth
   }
-}
+};
 
 
 export default connect(mapStateToProps, { ...actions })(Nav);

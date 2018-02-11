@@ -70,9 +70,10 @@ export default({ db }) => {
 
     mirror.save()
       .then(mirror => {
-        res.status(200).send(defaultResponseModel(true,'Mirror created', {mirror: mirror._id}));
+        res.status(200).send(defaultResponseModel(true,'Mirror created', {mirror: mirror}));
         User.update({_id: req.body.user}, { $push: { mirror: mirror._id }})
         .exec();
+
       })
       .catch(err => {
         res.status(404).send(defaultResponseModel(false, 'Failed to create Section.'));

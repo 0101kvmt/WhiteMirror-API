@@ -30,9 +30,6 @@ class Register extends Component {
     if(this.state.usernameText.length == 0 || this.state.passwordText == 0) {
       return ;
     }
-    console.log("username: ", this.state.usernameText);
-    console.log("password: ", this.state.passwordText);
-
     let username = this.state.usernameText;
     let password = this.state.passwordText;
 

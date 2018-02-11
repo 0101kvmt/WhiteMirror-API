@@ -26,6 +26,16 @@ let UserSchema = new Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: 'toDo'
   }],
+  location: [{
+    latitude: {
+      type: String,
+      default: '37.2981303'
+    },
+    longitude: {
+      type: String,
+      default: '-121.783822'
+    }
+  }],
   createdDate: {
     type: Date,
     default: Date.now
