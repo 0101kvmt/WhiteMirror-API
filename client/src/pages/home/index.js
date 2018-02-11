@@ -18,9 +18,14 @@ class Home extends Component {
   }
   componentDidMount() {
     if(!this.props.auth.token == ''){
-      this.props.validateToken(this.props.auth.token);
+      console.log("auth token exists");
+      this.props.validateToken(this.props.auth.token)
+        .then(() => {
+          this.props.getUserData(this.props.auth.token, this.props.auth.tokenUser);
+        });
+    } else {
+      this.props.getUserData(this.props.auth.token, this.props.auth.tokenUser);
     }
-
   }
 
 

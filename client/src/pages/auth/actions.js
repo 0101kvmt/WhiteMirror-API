@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-import { VALIDATE_TOKEN_REQUEST, VALIDATE_TOKEN_SUCCESS, VALIDATE_TOKEN_FAILURE, LOGOUT_SUCCESS, NEWUSER_FAILURE, NEWUSER_REQUEST, NEWUSER_SUCCESS, AUTH_FAILURE, AUTH_REQUEST, AUTH_SUCCESS } from './types';
+import { USER_GET_REQUEST, USER_GET_SUCCESS, USER_GET_FAILURE, VALIDATE_TOKEN_REQUEST, VALIDATE_TOKEN_SUCCESS, VALIDATE_TOKEN_FAILURE, LOGOUT_SUCCESS, NEWUSER_FAILURE, NEWUSER_REQUEST, NEWUSER_SUCCESS, AUTH_FAILURE, AUTH_REQUEST, AUTH_SUCCESS } from './types';
 
 const apiUrl = "http://localhost:3131/v1/" ;
 
@@ -79,8 +79,25 @@ export const validateToken = authToken => async (dispatch) => {
   dispatch({ type: VALIDATE_TOKEN_REQUEST });
   try {
     let { data } = await axios(tokenConfig.url, tokenConfig.config);
-    dispatch({ type: VALIDATE_TOKEN_SUCCESS, validToken: data.data.valid, token: authToken, tokenUser: data.data.decoded })
+    dispatch({ type: VALIDATE_TOKEN_SUCCESS, validToken: data.data.valid, token: authToken, tokenUser: data.data.decoded.id })
   } catch (err) {
     dispatch({ type: VALIDATE_TOKEN_FAILURE, errorMessage: err.response })
+  }
+};
+
+export const getUserData = (authToken, userId) => async (dispatch) => {
+  console.log("user", userId);
+  const userConfig = {
+    url: apiUrl + 'user/' + userId,
+    config:
+      { headers: {'Authorization': 'Bearer ' + authToken}}
+  }
+
+  dispatch({ type: USER_GET_REQUEST });
+  try {
+    let { data } = await axios(userConfig.url, userConfig.config);
+    dispatch({ type: USER_GET_SUCCESS, currentUser: data.data.user, errorMessage: '' })
+  } catch (err) {
+    dispatch({ type: USER_GET_FAILURE, errorMessage: err.response })
   }
 };

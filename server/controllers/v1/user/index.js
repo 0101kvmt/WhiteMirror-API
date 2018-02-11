@@ -38,13 +38,13 @@ export default({db}) => {
 
   api.get('/:id', (req, res, next) => {
     User.findById({ _id: req.params.id })
-      .populate([{path: 'mirror', populate: [{path: 'section'}, {path: 'option'}]}])
+      .populate([{path: 'mirror', populate: [{path: 'section'}, {path: 'option'}]}, {path: 'toDoList'}])
       .exec()
       .then(user => {
         res.status(200).send(defaultResponseModel(true, 'User has been succesfully found.', {user: user}));
       })
       .catch(err => {
-        res.status(404).send(defaultResponseModel(false, 'User does not exist in Database'));
+        res.status(404).send(defaultResponseModel(false, err));
         return next();
       })
   })

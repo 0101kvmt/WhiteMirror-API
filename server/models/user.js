@@ -24,7 +24,7 @@ let UserSchema = new Schema({
   ],
   toDoList: [{
     type: mongoose.Schema.Types.ObjectId,
-    ref: 'toDo'
+    ref: 'ToDo'
   }],
   location: [{
     latitude: {
