@@ -31,7 +31,7 @@ export default({ db }) => {
   api.post('/w', (req, res) => {
 
 
-    const apiUrl = 'https://api.darksky.net/forecast/' + "de59a4e908bcf93e49df5a1761431480/" + req.body.longitude + "," + req.body.latitude;
+    const apiUrl = 'https://api.darksky.net/forecast/' + "de59a4e908bcf93e49df5a1761431480/" + req.body.latitude + "," + req.body.longitude;
 
     console.log(apiUrl);
 

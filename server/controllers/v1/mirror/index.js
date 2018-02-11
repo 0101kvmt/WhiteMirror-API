@@ -4,6 +4,7 @@ import axios from 'axios';
 import Mirror from './../../../models/mirror';
 import Section from './../../../models/section';
 import Option from './../../../models/option';
+import User from './../../../models/user';
 
 import { defaultResponseModel } from './../../../utils/response';
 
@@ -64,24 +65,24 @@ export default({ db }) => {
 
   api.post('/', (req, res) => {
     let mirror = new Mirror({
-      location: req.body.location,
-      section: [],
+      section: []
     });
-
+    console.log("id", mirror._id)
     mirror.save()
       .then(mirror => {
-        res.status(200).send(defaultResponseModel(true,'Mirror created', {mirror: mirror}));
         User.update({_id: req.body.user}, { $push: { mirror: mirror._id }})
         .exec();
+        res.status(200).send(defaultResponseModel(true,'Mirror created', {mirror: mirror}));
+
 
       })
       .catch(err => {
-        res.status(404).send(defaultResponseModel(false, 'Failed to create Section.'));
+        res.status(404).send(defaultResponseModel(false, 'Failed to create Mirror.'));
       })
 
 
 
-  })
+  });
   ////////
 
   ////////////////////////////////////////////////////////////

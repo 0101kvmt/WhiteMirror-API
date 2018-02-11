@@ -66,11 +66,17 @@ export default ({db}) => {
         })
 
 
-        option.save();
+        option.save()
+          .then(() => {
+            Section.update({_id: section._id}, { $push: { options: option._id }})
+            .exec();
+          })
+          .catch(err => {
+            res.status(404).send(defaultResponseModel(false, 'Section failed to post: ' + err));
+          });
 
         res.status(200).send(defaultResponseModel(true,'Section created', {section: section}));
-            Section.update({_id: req.body.section}, { $push: { options: option._id }})
-            .exec();
+
 
       })
       .catch(err => {

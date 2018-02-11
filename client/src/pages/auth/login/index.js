@@ -39,6 +39,7 @@ class Login extends Component {
     this.props.authenticate(username, password);
   }
 
+
   render() {
     return (
       <CenterWrapper>

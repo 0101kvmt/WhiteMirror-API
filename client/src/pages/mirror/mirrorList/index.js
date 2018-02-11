@@ -31,13 +31,13 @@ class MirrorList extends Component {
     console.log("Mirror Viewed");
   }
   addMirror() {
-
-    this.props.MirrorPost(this.state.user)
+    console.log("user before mirror", this.props.auth.currentUser._id);
+    this.props.MirrorPost(this.props.auth.currentUser._id)
       .then(() => {
         this.state.options.forEach((o, i) => {
           this.props.SectionPost(this.state.user, this.state.sectionName + i, o, this.props.mirror.mirror._id);
         });
-      })
+      });
   }
   addSection(){
     this.props.SectionPost()
@@ -45,14 +45,15 @@ class MirrorList extends Component {
 
   // render functions
 
-  renderMirrors(mirrorList) {
-
+  renderMirrors() {
+    const mirrorList = this.props.auth.currentUser.mirror;
+    console.log(mirrorList);
       return (
 
         <CenterWrapper>
           <HorizontalRowWrapper >
 
-            {mirrorList.map((m, i) => {
+            {this.props.auth.currentUser.mirror.map((m, i) => {
               <MirrorBox onClick={this.viewMirror.bind(this)} > {m._id} </MirrorBox>
             })}
 
@@ -73,9 +74,8 @@ class MirrorList extends Component {
   //render
 
   render() {
-    const mirrorList = this.props.auth.currentUser.mirror;
     return (
-      this.renderMirrors(mirrorList)
+      this.renderMirrors()
     );
   }
 }

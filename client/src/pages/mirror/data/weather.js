@@ -37,6 +37,17 @@ class Weather extends Component {
       }
   }
 
+  formatTime(time) {
+    let date = new Date(time * 1000);
+    let hours = date.getHours();
+    let minutes = "0" + date.getMinutes();
+    let seconds = "0" + date.getSeconds();
+
+    let formattedTime = hours + ':' + minutes.substr(-2) + ':' + seconds.substr(-2);
+
+    return formattedTime;
+  }
+
 
   render() {
     if(!this.props.mirror.weather.currently){
@@ -44,74 +55,42 @@ class Weather extends Component {
         <p> loading.. </p>
       );
     } else {
+      const WeatherArray = [ this.props.mirror.weather.hourly.data[0], this.props.mirror.weather.hourly.data[6], this.props.mirror.weather.hourly.data[13] ]
 
-      const replace = /-/g;
-      const icon = this.props.mirror.weather.currently.icon.replace(replace, "_").toUpperCase();
-      const temperature = this.props.mirror.weather.currently.temperature;
-      const summary = this.props.mirror.weather.currently.summary;
+      const HourlyWeather = WeatherArray.map((t, i) => {
+
+        const replace = /-/g;
+        const time = this.formatTime(t.time);
+        console.log(time);
+
+        return (
+          <MirrorWeatherContainer>
+            <MirrorWeatherIcon>
+              <Skycons
+               color='white'
+               icon={t.icon.replace(replace, "_").toUpperCase()}
+               autoplay={true}
+               style={{ width: '100%', height: '100%'}}
+               />
+            </MirrorWeatherIcon>
+
+              <MirrorWeather>
+                {t.temperature} °F
+              </MirrorWeather>
+
+              <MirrorWeather>
+                {t.summary == "Partly Cloudy" || t.summary == "Mostly Cloudy" ? "Cloudy" : t.summary }
+              </MirrorWeather>
+
+          </MirrorWeatherContainer>
+
+        )
+      })
 
       return (
         <MirrorWeathersContainer>
 
-          <MirrorWeatherContainer>
-            <MirrorWeatherIcon>
-              <Skycons
-               color='white'
-               icon={icon}
-               autoplay={true}
-               style={{ width: '100%', height: '100%'}}
-               />
-            </MirrorWeatherIcon>
-
-              <MirrorWeather>
-                {temperature} °F;
-              </MirrorWeather>
-
-              <MirrorWeather>
-                {summary}
-              </MirrorWeather>
-
-          </MirrorWeatherContainer>
-
-          <MirrorWeatherContainer>
-            <MirrorWeatherIcon>
-              <Skycons
-               color='white'
-               icon="PARTLY_CLOUDY_DAY"
-               autoplay={true}
-               style={{ width: '100%', height: '100%'}}
-               />
-            </MirrorWeatherIcon>
-
-              <MirrorWeather>
-                {temperature} °F;
-              </MirrorWeather>
-
-              <MirrorWeather>
-                {summary}
-              </MirrorWeather>
-
-          </MirrorWeatherContainer>
-
-          <MirrorWeatherContainer>
-            <MirrorWeatherIcon>
-              <Skycons
-               color='white'
-               icon="SLEET"
-               autoplay={true}
-               style={{ width: '100%', height: '100%'}}
-               />
-            </MirrorWeatherIcon>
-
-              <MirrorWeather>
-                {temperature} °F;
-              </MirrorWeather>
-
-              <MirrorWeather>
-                {summary}
-              </MirrorWeather>
-
-          </MirrorWeatherContainer>
+        {HourlyWeather}
 
         </MirrorWeathersContainer>
 

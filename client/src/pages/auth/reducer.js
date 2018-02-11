@@ -1,4 +1,4 @@
-import { NEWUSER_FAILURE, NEWUSER_REQUEST, NEWUSER_SUCCESS, AUTH_FAILURE, AUTH_REQUEST, AUTH_SUCCESS } from './types';
+import { LOGOUT_SUCCESS, NEWUSER_FAILURE, NEWUSER_REQUEST, NEWUSER_SUCCESS, AUTH_FAILURE, AUTH_REQUEST, AUTH_SUCCESS } from './types';
 
 const INITIAL_STATE = {
   errorMessage: '',
@@ -20,6 +20,8 @@ export default (state = INITIAL_STATE, action) => {
       return { ...state, isRequesting: false, currentUser: action.currentUser, isAuthenticated: true };
     case AUTH_FAILURE:
       return { ...state, isRequesting: false, isAuthenticated: false};
+    case LOGOUT_SUCCESS:
+      return {...state, isRequesting: false, isAuthenticated: false, currentUser: action.currentUser}
     default:
       return state;
   }

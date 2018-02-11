@@ -32,19 +32,19 @@ export const MirrorGet = (mirrorId) => {
   }
 };
 
-export const MirrorPost = (userId, option1, font, fontSize, padding, sectionName) => {
+export const MirrorPost = (userId) => {
 
   const mirrorConfiguration = {
     url: apiUrl + "mirror",
     method: 'post',
     mirror: {
-
+      user: userId
     }
   }
 
   return dispatch => {
     dispatch({ type: MIRROR_POST_REQUEST });
-    return axios.post(mirrorConfiguration.url)
+    return axios.post(mirrorConfiguration.url, mirrorConfiguration.mirror)
       .then(res => {
         dispatch({ type: MIRROR_POST_SUCCESS, mirror: res.data.data.mirror,  errorMessage: ''});
       })
@@ -93,11 +93,11 @@ export const SectionPost = (userId, sectionName, option, mirrorId) => {
 export const getWeather = (latitude, longitude) => async (dispatch) => {
 
   const weatherConfig = {
-    url: apiUrl + "weather/w",
+    url: apiUrl + "mirror/weather/w",
     method: 'post',
     weather: {
-      longitude: longitude,
-      latitude: latitude
+      latitude: latitude,
+      longitude: longitude
     },
     config: {
       headers: {"Access-Control-Allow-Origin": "*"}

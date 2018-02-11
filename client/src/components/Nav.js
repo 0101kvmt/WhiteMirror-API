@@ -66,7 +66,14 @@ class Nav extends Component {
     this.setState(prevState => ({
       menuHidden: !prevState.menuHidden
     }));
-  }
+  };
+
+  logout() {
+    this.setState(prevState => ({
+      menuHidden: !prevState.menuHidden
+    }));
+    this.props.logOut();
+  };
 
   render() {
     return (
@@ -78,7 +85,7 @@ class Nav extends Component {
             <NavLink hidden={!this.state.linkHidden} onClick = {this.menuClick.bind(this)}><Link style={{...LinkStyle}} to="/mirrorlist">Mirrors</Link></NavLink>
             <NavLink hidden={this.state.linkHidden} onClick = {this.menuClick.bind(this)}><Link style={{...LinkStyle}} to="/login">Login</Link></NavLink>
             <NavLink hidden={this.state.linkHidden} onClick = {this.menuClick.bind(this)}><Link style={{...LinkStyle}} to="/register">Register</Link></NavLink>
-            <NavLink hidden={!this.state.linkHidden} onClick = {this.menuClick.bind(this)}><Link style={{...LinkStyle}} to="/">Logout</Link></NavLink>
+            <NavLink hidden={!this.state.linkHidden} onClick = {this.logout.bind(this)}><Link style={{...LinkStyle}} to="/">Logout</Link></NavLink>
           </ul>
         </NavContainer>
       </WholeContainer>

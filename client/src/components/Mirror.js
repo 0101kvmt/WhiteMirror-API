@@ -43,6 +43,7 @@ export const MirrorWeather = styled.p`
 export const MirrorWeatherIcon = styled.div`
   width: 90px;
   height: 45px;
+  margin-bottom: 5
 `;
 
 export const MirrorWeatherContainer = styled.div`

@@ -38,7 +38,7 @@ export default({db}) => {
 
   api.get('/:id', (req, res, next) => {
     User.findById({ _id: req.params.id })
-      .populate([{path: 'mirror'}])
+      .populate([{path: 'mirror', populate: [{path: 'section'}, {path: 'option'}]}])
       .exec()
       .then(user => {
         res.status(200).send(defaultResponseModel(true, 'User has been succesfully found.', {user: user}));
@@ -55,7 +55,13 @@ export default({db}) => {
 
   api.post('/', (req, res) => {
     User.register(new User({
-      username: req.body.username
+      username: req.body.username,
+      mirror: [],
+      toDoList: [],
+      location: [{
+        latitude: req.body.latitude,
+        longitude: req.body.longitude
+      }]
     }), req.body.password, (err, user) => {
 
       if (err) {

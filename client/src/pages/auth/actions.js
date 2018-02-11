@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-import { NEWUSER_FAILURE, NEWUSER_REQUEST, NEWUSER_SUCCESS, AUTH_FAILURE, AUTH_REQUEST, AUTH_SUCCESS } from './types';
+import { LOGOUT_SUCCESS, NEWUSER_FAILURE, NEWUSER_REQUEST, NEWUSER_SUCCESS, AUTH_FAILURE, AUTH_REQUEST, AUTH_SUCCESS } from './types';
 
 const apiUrl = "http://localhost:3131/v1/" ;
 
@@ -30,6 +30,12 @@ export const newUser = (username, password) => {
           dispatch({ type: NEWUSER_FAILURE, errorMessage: 'Cannot connect to server. Please try again.'});
         }
       })
+  }
+};
+
+export const logOut = () => {
+  return dispatch => {
+    dispatch({ type: LOGOUT_SUCCESS, currentUser: null});
   }
 };
 
