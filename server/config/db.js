@@ -10,7 +10,7 @@ import Option from './../models/option';
 //                    Mongoose Connect                    //
 ////////////////////////////////////////////////////////////
 
-let dbURI = "mongodb://localhost/WhiteMirror" || process.env.MONGODB_URI;
+let dbURI = "mongodb://admin:admin@ds231658.mlab.com:31658/whitemirrordb" || process.env.MONGODB_URI;
 
 console.log(Option.schema.path('option').enumValues);
 
