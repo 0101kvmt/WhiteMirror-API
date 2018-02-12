@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import styled from 'styled-components';
+import socketIOClient from "socket.io-client";
 
 import * as actions from './../auth/actions';
 
@@ -17,6 +18,8 @@ class Home extends Component {
     };
   }
   componentDidMount() {
+    const socket = socketIOClient("http://127.0.0.1:3131");
+
     if(!this.props.auth.token == ''){
       console.log("auth token exists");
       this.props.validateToken(this.props.auth.token)

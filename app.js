@@ -15,6 +15,8 @@ import { spec } from './server/utils/main_doc';
 import routes from './server/routes';
 import User from './server/models/user';
 
+const socketIo = require('socket.io');
+
 const LocalStrategy = require('passport-local').Strategy;
 
 let app = express();
@@ -76,14 +78,28 @@ app.use('/v1/docs', swaggerUi.serve, swaggerUi.setup(spec));
 
 
 ////////////////////////////////////////////////////////////
+//                        Socket.io                       //
+////////////////////////////////////////////////////////////
+
+const io = socketIo(server);
+
+io.on("connection", socket => {
+  console.log("New client connected");
+
+  socket.on("disconnect", () => {
+    console.log("Client disconnected");
+  });
+});
+
+
+////////////////////////////////////////////////////////////
 //                 Listening to server                    //
 ////////////////////////////////////////////////////////////
 
 
-app.server = http.createServer(app);
+const server = http.createServer(app);
 
 
-app.server.listen(process.env.PORT || port, () => console.log('connected to port ' + port));
-
+server.listen(process.env.PORT || port, () => console.log('connected to port ' + port));
 
 export default app;
