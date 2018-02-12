@@ -43,7 +43,7 @@ export default({ db }) => {
         res.status(404).send(defaultResponseModel(false, 'Weather failed to get: ' + err))
       })
   });
-
+  
   return api;
 
 }

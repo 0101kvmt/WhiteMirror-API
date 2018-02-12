@@ -83,7 +83,7 @@ export default({ db }) => {
 
 
   });
-  ////////
+
 
   ////////////////////////////////////////////////////////////
   //                   GET '/weather'                       //
@@ -104,6 +104,21 @@ export default({ db }) => {
       .catch(err => {
         res.status(404).send(defaultResponseModel(false, 'Weather failed to get: ' + err))
       })
+  });
+
+  ////////////////////////////////////////////////////////////
+  //                    DELETE '/:id'                       //
+  ////////////////////////////////////////////////////////////
+
+  api.delete('/:id', (req,res) => {
+    Mirror.remove({_id: req.params.id})
+    .then((option) => {
+      res.status(200).send(defaultResponseModel(true,'Mirror deleted', {mirror_id: mirror._id}));
+    })
+    .catch(err => {
+      res.status(404).send(defaultResponseModel(false, 'Mirror failed to delete: ' + err));
+    })
+
   });
 
   return api;

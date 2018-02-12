@@ -54,7 +54,10 @@ class MirrorList extends Component {
           <HorizontalRowWrapper >
 
             {this.props.auth.currentUser.mirror.map((m, i) => {
-              <MirrorBox onClick={this.viewMirror.bind(this)} > {m._id} </MirrorBox>
+              return (
+                  <MirrorBox onClick={this.viewMirror.bind(this)} > {m._id} </MirrorBox>
+              )
+
             })}
 
             {this.renderAddMirrors()}

@@ -41,8 +41,6 @@ export default({db}) => {
       padding: req.body.padding
     })
 
-    console.log("user", req.body.user);
-
     option.save()
       .then((option) => {
         res.status(200).send(defaultResponseModel(true,'Option created', {option_id: option._id}));
@@ -55,6 +53,20 @@ export default({db}) => {
 
   });
 
+  ////////////////////////////////////////////////////////////
+  //                    DELETE '/:id'                       //
+  ////////////////////////////////////////////////////////////
+
+  api.delete('/:id', (req,res) => {
+    Option.remove({_id: req.params.id})
+    .then((option) => {
+      res.status(200).send(defaultResponseModel(true,'Option deleted', {option_id: option._id}));
+    })
+    .catch(err => {
+      res.status(404).send(defaultResponseModel(false, 'Option failed to post: ' + err));
+    })
+
+  });
   ////////////////////////////////////////////////////////////
   //                       PUT '/'                          //
   ////////////////////////////////////////////////////////////

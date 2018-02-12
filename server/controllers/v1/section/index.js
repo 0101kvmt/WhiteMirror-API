@@ -86,6 +86,24 @@ export default ({db}) => {
 
 
   })
+
+  ////////////////////////////////////////////////////////////
+  //                    DELETE '/:id'                       //
+  ////////////////////////////////////////////////////////////
+
+  api.delete('/:id', (req,res) => {
+
+    Section.remove({_id: req.params.id})
+    .then((option) => {
+      res.status(200).send(defaultResponseModel(true,'Section deleted', {option_id: option._id}));
+      Section.update({_id: req.body.section}, { $pull: { options: option._id }})
+      .exec();
+    })
+    .catch(err => {
+      res.status(404).send(defaultResponseModel(false, 'Section failed to post: ' + err));
+    })
+
+  });
   ////////////////////////////////////////////////////////////
   //                       PUT '/'                          //
   ////////////////////////////////////////////////////////////

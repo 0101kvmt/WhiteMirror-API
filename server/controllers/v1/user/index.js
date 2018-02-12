@@ -15,7 +15,7 @@ export default({db}) => {
 
   api.get('/', (req, res) => {
     User.find({})
-    .populate([{path: 'mirror', populate: [{path: 'section'}, {path: 'option'}]}])
+    .populate([{path: 'mirror', populate: [{path: 'section', populate: [{path: 'options'}]}]}, {path: 'toDoList'}])
     .exec()
     .then(users => {
       let userMap = {};
@@ -38,7 +38,7 @@ export default({db}) => {
 
   api.get('/:id', (req, res, next) => {
     User.findById({ _id: req.params.id })
-      .populate([{path: 'mirror', populate: [{path: 'section'}, {path: 'option'}]}, {path: 'toDoList'}])
+      .populate([{path: 'mirror', populate: [{path: 'section'}, {path: 'options'}]}, {path: 'toDoList'}])
       .exec()
       .then(user => {
         res.status(200).send(defaultResponseModel(true, 'User has been succesfully found.', {user: user}));
