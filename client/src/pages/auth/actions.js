@@ -4,6 +4,11 @@ import { USER_GET_REQUEST, USER_GET_SUCCESS, USER_GET_FAILURE, VALIDATE_TOKEN_RE
 
 const apiUrl = "http://localhost:3131/v1/" ;
 
+////////////////////////////////////////////////////////////
+//                     GET '/user'                        //
+////////////////////////////////////////////////////////////
+
+
 export const newUser = (username, password) => {
 
   const newUserConfiguration = {
@@ -40,6 +45,10 @@ export const logOut = () => {
   }
 };
 
+////////////////////////////////////////////////////////////
+//                     Authenticate                       //
+////////////////////////////////////////////////////////////
+
 export const authenticate = (username, password) => {
 
   const authConfiguration = {
@@ -69,6 +78,11 @@ export const authenticate = (username, password) => {
   }
 };
 
+////////////////////////////////////////////////////////////
+//                    validateToken                       //
+////////////////////////////////////////////////////////////
+
+
 export const validateToken = authToken => async (dispatch) => {
   const tokenConfig = {
     url: apiUrl + 'verify/' + authToken,
@@ -84,6 +98,11 @@ export const validateToken = authToken => async (dispatch) => {
     dispatch({ type: VALIDATE_TOKEN_FAILURE, errorMessage: err.response })
   }
 };
+
+////////////////////////////////////////////////////////////
+//                    Get User Data                       //
+////////////////////////////////////////////////////////////
+
 
 export const getUserData = (authToken, userId) => async (dispatch) => {
   console.log("user", userId);

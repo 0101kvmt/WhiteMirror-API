@@ -83,7 +83,7 @@ app.use('/v1/docs', swaggerUi.serve, swaggerUi.setup(spec));
 app.server = http.createServer(app);
 
 
-app.server.listen(port, () => console.log('connected to port ' + port));
+app.server.listen(process.env.PORT || port, () => console.log('connected to port ' + port));
 
 
 export default app;

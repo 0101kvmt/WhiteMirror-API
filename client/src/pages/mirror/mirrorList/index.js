@@ -30,6 +30,7 @@ class MirrorList extends Component {
   viewMirror() {
     console.log("Mirror Viewed");
   }
+
   addMirror() {
     console.log("user before mirror", this.props.auth.currentUser._id);
     this.props.MirrorPost(this.props.auth.currentUser._id)
@@ -38,6 +39,30 @@ class MirrorList extends Component {
           this.props.SectionPost(this.state.user, this.state.sectionName + i, o, this.props.mirror.mirror._id);
         });
       });
+  }
+
+  deleteMirror(mirror) {
+    let section = mirror.section;
+    console.log("mirrr", mirror);
+    console.log("section", section);
+
+    if(section.length > 0){
+
+      section.forEach((s, i) => {
+          this.props.OptionDelete(s.options)
+          .then(() => {
+            section.forEach((s, i) => {
+              this.props.SectionDelete(s._id)
+                .then(() => {
+                  this.props.MirrorDelete(mirror._id, this.props.auth.currentUser._id)
+                })
+            })
+          })
+      })
+    } else {
+      console.log("deleting mirror", mirror._id);
+      this.props.MirrorDelete(mirror._id, this.props.auth.currentUser._id);
+    }
   }
   addSection(){
     this.props.SectionPost()
@@ -55,7 +80,7 @@ class MirrorList extends Component {
 
             {this.props.auth.currentUser.mirror.map((m, i) => {
               return (
-                  <MirrorBox onClick={this.viewMirror.bind(this)} > {m._id} </MirrorBox>
+                  <MirrorBox onClick={() => this.deleteMirror(m)} > {m._id} </MirrorBox>
               )
 
             })}

@@ -43,7 +43,6 @@ export default (state = INITIAL_STATE, action) => {
       return { ...state, isRequesting: false, currentUser: action.currentUser, token: action.token, isAuthenticated: true };
     case AUTH_FAILURE:
       return { ...state, isRequesting: false, isAuthenticated: false};
-
 // Logout
     case LOGOUT_SUCCESS:
       return {...state, isRequesting: false, isAuthenticated: false, currentUser: action.currentUser}

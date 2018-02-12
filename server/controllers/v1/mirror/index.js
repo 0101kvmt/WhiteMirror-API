@@ -112,7 +112,10 @@ export default({ db }) => {
 
   api.delete('/:id', (req,res) => {
     Mirror.remove({_id: req.params.id})
-    .then((option) => {
+    .then((mirror) => {
+      console.log("params", req.data.userId);
+      User.update({_id: req.params.userId}, { $pull: { mirror: mirror }})
+      .exec();
       res.status(200).send(defaultResponseModel(true,'Mirror deleted', {mirror_id: mirror._id}));
     })
     .catch(err => {

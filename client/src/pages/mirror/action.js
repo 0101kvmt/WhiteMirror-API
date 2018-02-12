@@ -1,38 +1,17 @@
 import axios from 'axios';
 
-import { SECTION_POST_FAILURE, SECTION_POST_REQUEST, SECTION_POST_SUCCESS, MIRROR_POST_FAILURE, MIRROR_POST_REQUEST, MIRROR_POST_SUCCESS, MIRROR_GET_FAILURE, MIRROR_GET_REQUEST, MIRROR_GET_SUCCESS, FETCH_WEATHER_FAILURE, FETCH_WEATHER_REQUEST, FETCH_WEATHER_SUCCESS,  } from './types';
+import { MIRROR_DELETE_REQUEST, MIRROR_DELETE_SUCCESS, MIRROR_DELETE_FAILURE, SECTION_DELETE_REQUEST, SECTION_DELETE_SUCCESS, SECTION_DELETE_FAILURE, OPTION_DELETE_REQUEST, OPTION_DELETE_SUCCESS, OPTION_DELETE_FAILURE, SECTION_POST_FAILURE, SECTION_POST_REQUEST, SECTION_POST_SUCCESS, MIRROR_POST_FAILURE, MIRROR_POST_REQUEST, MIRROR_POST_SUCCESS, MIRROR_GET_FAILURE, MIRROR_GET_REQUEST, MIRROR_GET_SUCCESS, FETCH_WEATHER_FAILURE, FETCH_WEATHER_REQUEST, FETCH_WEATHER_SUCCESS,  } from './types';
 
 
 
 const apiUrl = "http://localhost:3131/v1/" ;
 
 
-export const MirrorGet = (mirrorId) => {
+////////////////////////////////////////////////////////////
+//                      Post Mirror                       //
+////////////////////////////////////////////////////////////
 
-  const mirrorConfiguration = {
-    url: apiUrl + "mirror/" + mirrorId,
-    method: 'get',
-    mirror: {}
-  }
-
-  return dispatch => {
-    dispatch({ type: MIRROR_GET_REQUEST });
-    return axios.get(mirrorConfiguration.url)
-      .then(res => {
-        dispatch({ type: MIRROR_GET_SUCCESS, mirror: res.data.data.mirror,  errorMessage: ''});
-      })
-      .catch(err => {
-        if(err.response){
-          dispatch({ type: MIRROR_GET_FAILURE, errorMessage: err.response});
-        }
-        else{
-          dispatch({ type: MIRROR_GET_FAILURE, errorMessage: 'Cannot connect to server. Please try again.'});
-        }
-      })
-  }
-};
-
-export const MirrorPost = (userId) => {
+export const MirrorPost = (mirrorId, userId) => {
 
   const mirrorConfiguration = {
     url: apiUrl + "mirror",
@@ -58,6 +37,11 @@ export const MirrorPost = (userId) => {
       })
   }
 };
+
+////////////////////////////////////////////////////////////
+//                     Post Section                       //
+////////////////////////////////////////////////////////////
+
 
 export const SectionPost = (userId, sectionName, option, mirrorId) => {
 
@@ -88,6 +72,97 @@ export const SectionPost = (userId, sectionName, option, mirrorId) => {
       })
   }
 };
+
+////////////////////////////////////////////////////////////
+//                      Get Mirror                        //
+////////////////////////////////////////////////////////////
+
+
+export const MirrorGet = (mirrorId) => {
+
+  const mirrorConfiguration = {
+    url: apiUrl + "mirror/" + mirrorId,
+    method: 'get',
+    mirror: {}
+  }
+
+  return dispatch => {
+    dispatch({ type: MIRROR_GET_REQUEST });
+    return axios.get(mirrorConfiguration.url)
+      .then(res => {
+        dispatch({ type: MIRROR_GET_SUCCESS, mirror: res.data.data.mirror,  errorMessage: ''});
+      })
+      .catch(err => {
+        if(err.response){
+          dispatch({ type: MIRROR_GET_FAILURE, errorMessage: err.response});
+        }
+        else{
+          dispatch({ type: MIRROR_GET_FAILURE, errorMessage: 'Cannot connect to server. Please try again.'});
+        }
+      })
+  }
+};
+
+////////////////////////////////////////////////////////////
+//                    Delete Option                       //
+////////////////////////////////////////////////////////////
+
+
+export const OptionDelete = (optionId) => async (dispatch) => {
+  const optionConfig = {
+    url: apiUrl + 'option/' + optionId
+  }
+
+  dispatch({ type: OPTION_DELETE_REQUEST });
+  try {
+    let { data } = await axios.delete(optionConfig.url);
+    dispatch({ type: OPTION_DELETE_SUCCESS,  errorMessage: '' })
+  } catch (err) {
+    dispatch({ type: OPTION_DELETE_FAILURE, errorMessage: err.response })
+  }
+};
+
+////////////////////////////////////////////////////////////
+//                    Delete Section                      //
+////////////////////////////////////////////////////////////
+
+
+export const SectionDelete = (sectionId) => async (dispatch) => {
+  const sectionConfig = {
+    url: apiUrl + 'section/' + sectionId
+  }
+
+  dispatch({ type: SECTION_DELETE_REQUEST });
+  try {
+    let { data } = await axios.delete(sectionConfig.url);
+    dispatch({ type: SECTION_DELETE_SUCCESS,  errorMessage: '' })
+  } catch (err) {
+    dispatch({ type: SECTION_DELETE_FAILURE, errorMessage: err.response })
+  }
+};
+
+////////////////////////////////////////////////////////////
+//                     Delete Mirror                      //
+////////////////////////////////////////////////////////////
+
+
+export const MirrorDelete = (mirrorId, userId) => async (dispatch) => {
+  const mirrorConfig = {
+    url: apiUrl + 'mirror/' + mirrorId
+  }
+
+  dispatch({ type: MIRROR_DELETE_REQUEST });
+  try {
+    let { data } = await axios.delete(mirrorConfig.url, {data: {userId: userId}});
+    dispatch({ type: MIRROR_DELETE_SUCCESS,  errorMessage: '' })
+  } catch (err) {
+    dispatch({ type: MIRROR_DELETE_FAILURE, errorMessage: err })
+  }
+};
+
+////////////////////////////////////////////////////////////
+//                      Get Weather                       //
+////////////////////////////////////////////////////////////
 
 
 export const getWeather = (latitude, longitude) => async (dispatch) => {
