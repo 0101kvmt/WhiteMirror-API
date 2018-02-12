@@ -2,7 +2,7 @@ import axios from 'axios';
 
 import { USER_GET_REQUEST, USER_GET_SUCCESS, USER_GET_FAILURE, VALIDATE_TOKEN_REQUEST, VALIDATE_TOKEN_SUCCESS, VALIDATE_TOKEN_FAILURE, LOGOUT_SUCCESS, NEWUSER_FAILURE, NEWUSER_REQUEST, NEWUSER_SUCCESS, AUTH_FAILURE, AUTH_REQUEST, AUTH_SUCCESS } from './types';
 
-const apiUrl = "http://localhost:3131/v1/" ;
+const apiUrl = "https://whitemirr0r.herokuapp.com/v1/" ;
 
 ////////////////////////////////////////////////////////////
 //                       New User                         //

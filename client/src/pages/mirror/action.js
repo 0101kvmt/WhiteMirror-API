@@ -4,7 +4,7 @@ import { MIRROR_DELETE_REQUEST, MIRROR_DELETE_SUCCESS, MIRROR_DELETE_FAILURE, SE
 
 
 
-const apiUrl = "http://localhost:3131/v1/" ;
+const apiUrl = "https://whitemirr0r.herokuapp.com/v1/" ;
 
 
 ////////////////////////////////////////////////////////////
