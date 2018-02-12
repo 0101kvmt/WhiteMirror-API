@@ -40,6 +40,7 @@
     "cors": "^2.8.4",
     "css-loader": "^0.28.9",
     "dotenv": "^4.0.0",
+    "eslint": "^4.15.0",
     "express": "^4.16.2",
     "express-jwt": "^5.3.0",
     "express-session": "^1.15.6",
@@ -49,10 +50,13 @@
     "moment": "^2.20.1",
     "moment-timezone": "^0.5.14",
     "mongoose": "^4.13.9",
+    "nodemon": "^1.14.11",
     "passport": "^0.4.0",
     "passport-local": "^1.0.0",
     "passport-local-mongoose": "^4.4.0",
     "r": "0.0.5",
+    "react": "^16.2.0",
+    "react-dom": "^16.2.0",
     "react-moment": "^0.7.0",
     "react-redux": "^5.0.6",
     "react-router-dom": "^4.2.2",
@@ -65,6 +69,8 @@
     "style-loader": "^0.20.1",
     "styled-components": "^3.1.4",
     "swagger-jsdoc": "^1.9.7",
-    "swagger-ui-express": "^2.0.14"
+    "swagger-ui-express": "^2.0.14",
+    "webpack": "^3.10.0"
+
   }
 }
