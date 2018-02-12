@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { BrowserRouter, Route, Link } from 'react-router-dom';
 import styled from 'styled-components';
 
-import {MenuBtn} from './Menubtn';
+import {MenuBtn} from './MenuBtn';
 import * as actions from './../pages/auth/actions';
 
 const NavContainer = styled.div`
