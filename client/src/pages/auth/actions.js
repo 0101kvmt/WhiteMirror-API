@@ -5,7 +5,7 @@ import { USER_GET_REQUEST, USER_GET_SUCCESS, USER_GET_FAILURE, VALIDATE_TOKEN_RE
 const apiUrl = "http://localhost:3131/v1/" ;
 
 ////////////////////////////////////////////////////////////
-//                     GET '/user'                        //
+//                       New User                         //
 ////////////////////////////////////////////////////////////
 
 
@@ -25,7 +25,7 @@ export const newUser = (username, password) => {
     dispatch({ type: NEWUSER_REQUEST });
     return axios.post(newUserConfiguration.url, newUserConfiguration.payload)
       .then(res => {
-        dispatch({ type: NEWUSER_SUCCESS, currentUser: res.data.data.user});
+        dispatch({ type: NEWUSER_SUCCESS, currentUser: res.data.data.user, token: res.data.data.token, tokenUser: res.data.data.user._id});
       })
       .catch(err => {
         if(err.response){
@@ -41,7 +41,7 @@ export const newUser = (username, password) => {
 
 export const logOut = () => {
   return dispatch => {
-    dispatch({ type: LOGOUT_SUCCESS, currentUser: null});
+    dispatch({ type: LOGOUT_SUCCESS, currentUser: null, token: '', tokenUser: ''});
   }
 };
 
@@ -65,7 +65,7 @@ export const authenticate = (username, password) => {
     dispatch({ type: AUTH_REQUEST });
     return axios.post(authConfiguration.url, authConfiguration.auth)
       .then(res => {
-        dispatch({ type: AUTH_SUCCESS, currentUser: res.data.data.user, token: res.data.data.token});
+        dispatch({ type: AUTH_SUCCESS, currentUser: res.data.data.user, token: res.data.data.token, tokenUser: res.data.data.user._id});
       })
       .catch(err => {
         if(err.response){

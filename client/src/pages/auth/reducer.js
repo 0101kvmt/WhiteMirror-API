@@ -16,7 +16,7 @@ export default (state = INITIAL_STATE, action) => {
     case NEWUSER_REQUEST:
       return { ...state, isRequesting: true, isAuthenticated: false };
     case NEWUSER_SUCCESS:
-      return { ...state, isRequesting: false, currentUser: action.currentUser, token: action.token, isAuthenticated: true };
+      return { ...state, isRequesting: false, currentUser: action.currentUser, token: action.token, tokenUser: action.tokenUser, isAuthenticated: true };
     case NEWUSER_FAILURE:
       return { ...state, isRequesting: false, isAuthenticated: false};
 
@@ -32,7 +32,7 @@ export default (state = INITIAL_STATE, action) => {
     case VALIDATE_TOKEN_REQUEST:
       return { ...state, isRequesting: true };
     case VALIDATE_TOKEN_SUCCESS:
-      return { ...state, validToken: action.validToken, token: action.token, tokenUser: action.tokenUser, isRequesting: false, isAuthenticated: true, errorMessage: action.errorMessge };
+      return { ...state, validToken: action.validToken, token: action.token, tokenUser: action.tokenUser, isRequesting: false, isAuthenticated: true, errorMessage: action.errorMessage };
     case VALIDATE_TOKEN_FAILURE:
       return { ...state, errorMessage: action.errorMessage, isRequesting: false };
 
@@ -40,12 +40,12 @@ export default (state = INITIAL_STATE, action) => {
     case AUTH_REQUEST:
       return { ...state, isRequesting: true, isAuthenticated: false };
     case AUTH_SUCCESS:
-      return { ...state, isRequesting: false, currentUser: action.currentUser, token: action.token, isAuthenticated: true };
+      return { ...state, isRequesting: false, currentUser: action.currentUser, token: action.token, tokenUser: action.tokenUser, isAuthenticated: true };
     case AUTH_FAILURE:
       return { ...state, isRequesting: false, isAuthenticated: false};
 // Logout
     case LOGOUT_SUCCESS:
-      return {...state, isRequesting: false, isAuthenticated: false, currentUser: action.currentUser}
+      return {...state, isRequesting: false, isAuthenticated: false, currentUser: action.currentUser, token: action.token, tokenUser: action.tokenUser}
     default:
       return state;
   }

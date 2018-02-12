@@ -21,10 +21,8 @@ class Home extends Component {
       console.log("auth token exists");
       this.props.validateToken(this.props.auth.token)
         .then(() => {
-          this.props.getUserData(this.props.auth.token, this.props.auth.tokenUser);
+          this.props.getUserData(this.props.auth.token, this.props.auth.currentUser._id);
         });
-    } else {
-      this.props.getUserData(this.props.auth.token, this.props.auth.tokenUser);
     }
   }
 

@@ -46,23 +46,20 @@ class MirrorList extends Component {
     console.log("mirrr", mirror);
     console.log("section", section);
 
-    if(section.length > 0){
+    while(section.length > 0){
 
       section.forEach((s, i) => {
           this.props.OptionDelete(s.options)
           .then(() => {
             section.forEach((s, i) => {
               this.props.SectionDelete(s._id)
-                .then(() => {
-                  this.props.MirrorDelete(mirror._id, this.props.auth.currentUser._id)
-                })
             })
           })
       })
-    } else {
-      console.log("deleting mirror", mirror._id);
-      this.props.MirrorDelete(mirror._id, this.props.auth.currentUser._id);
+
     }
+      console.log("deleting mirror", mirror._id);
+      this.props.MirrorDelete(mirror._id);
   }
   addSection(){
     this.props.SectionPost()

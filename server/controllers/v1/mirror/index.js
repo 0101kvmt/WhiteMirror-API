@@ -65,7 +65,8 @@ export default({ db }) => {
 
   api.post('/', (req, res) => {
     let mirror = new Mirror({
-      section: []
+      section: [],
+      userId: req.body.user
     });
     console.log("id", mirror._id)
     mirror.save()
@@ -111,16 +112,18 @@ export default({ db }) => {
   ////////////////////////////////////////////////////////////
 
   api.delete('/:id', (req,res) => {
-    Mirror.remove({_id: req.params.id})
-    .then((mirror) => {
-      console.log("params", req.data.userId);
-      User.update({_id: req.params.userId}, { $pull: { mirror: mirror }})
-      .exec();
-      res.status(200).send(defaultResponseModel(true,'Mirror deleted', {mirror_id: mirror._id}));
-    })
-    .catch(err => {
-      res.status(404).send(defaultResponseModel(false, 'Mirror failed to delete: ' + err));
-    })
+
+    Mirror.findById({ _id: req.params.id })
+      .exec()
+      .then(mirror => {
+        User.update({_id: mirror.userId}, { $pull: { mirror: req.params.id }})
+        .exec();
+        Mirror.remove({_id: req.params.id});
+        res.status(200).send(defaultResponseModel(true,'Mirror deleted', {mirror_id: mirror._id}));
+      })
+      .catch(err => {
+        res.status(404).send(defaultResponseModel(false, 'Mirror failed to delete: ' + err));
+      })
 
   });
 

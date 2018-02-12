@@ -3,6 +3,10 @@ import mongoose from 'mongoose';
 let Schema = mongoose.Schema;
 
 let MirrorSchema = new Schema({
+  userId: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'User'
+  },
   section:
   // {
     [{

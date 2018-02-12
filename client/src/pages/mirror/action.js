@@ -11,7 +11,7 @@ const apiUrl = "http://localhost:3131/v1/" ;
 //                      Post Mirror                       //
 ////////////////////////////////////////////////////////////
 
-export const MirrorPost = (mirrorId, userId) => {
+export const MirrorPost = (userId) => {
 
   const mirrorConfiguration = {
     url: apiUrl + "mirror",
@@ -146,14 +146,14 @@ export const SectionDelete = (sectionId) => async (dispatch) => {
 ////////////////////////////////////////////////////////////
 
 
-export const MirrorDelete = (mirrorId, userId) => async (dispatch) => {
+export const MirrorDelete = (mirrorId) => async (dispatch) => {
   const mirrorConfig = {
     url: apiUrl + 'mirror/' + mirrorId
   }
 
   dispatch({ type: MIRROR_DELETE_REQUEST });
   try {
-    let { data } = await axios.delete(mirrorConfig.url, {data: {userId: userId}});
+    let { data } = await axios.delete(mirrorConfig.url);
     dispatch({ type: MIRROR_DELETE_SUCCESS,  errorMessage: '' })
   } catch (err) {
     dispatch({ type: MIRROR_DELETE_FAILURE, errorMessage: err })
