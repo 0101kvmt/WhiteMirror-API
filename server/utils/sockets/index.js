@@ -1,0 +1,17 @@
+export const sockets = (socket, server) => {
+
+  const appSocket = socket(server);
+
+  appSocket.on('connection', function(socket) {
+      console.log("Socket.io: User Connected" + socket.id);
+      // Receiving Todos from client
+        socket.on('getMirror', (data) => {
+          socket.emit('updateWeather', {weather: data.weather} );
+        });
+
+
+      socket.on('disconnect', function() {
+          console.log("Socket.io: User Disconnected");
+      });
+  });
+}

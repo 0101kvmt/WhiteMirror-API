@@ -17,6 +17,7 @@ import Register from './pages/auth/register';
 import { Wrapper } from './components/Wrapper';
 import Nav from './components/Nav';
 
+
 class App extends Component {
   render() {
     return (

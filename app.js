@@ -10,12 +10,14 @@ import swaggerJSDoc from 'swagger-jsdoc';
 import swaggerUi from 'swagger-ui-express';
 import path from 'path';
 import cors from 'cors';
+import socket from 'socket.io';
 
+import { sockets } from './server/utils/sockets';
 import { spec } from './server/utils/main_doc';
 import routes from './server/routes';
 import User from './server/models/user';
 
-const socketIo = require('socket.io');
+
 
 const LocalStrategy = require('passport-local').Strategy;
 
@@ -77,20 +79,6 @@ app.get('/swagger.json', function(req, res) {
 app.use('/v1/docs', swaggerUi.serve, swaggerUi.setup(spec));
 
 
-////////////////////////////////////////////////////////////
-//                        Socket.io                       //
-////////////////////////////////////////////////////////////
-
-const io = socketIo(server);
-
-io.on("connection", socket => {
-  console.log("New client connected");
-
-  socket.on("disconnect", () => {
-    console.log("Client disconnected");
-  });
-});
-
 
 ////////////////////////////////////////////////////////////
 //                 Listening to server                    //
@@ -101,5 +89,11 @@ const server = http.createServer(app);
 
 
 server.listen(process.env.PORT || port, () => console.log('connected to port ' + port));
+
+////////////////////////////////////////////////////////////
+//                        Socket.io                       //
+////////////////////////////////////////////////////////////
+
+sockets(socket, server);
 
 export default app;

@@ -3,12 +3,17 @@ import ReactDOM from 'react-dom';
 import styled from 'styled-components';
 import { connect } from 'react-redux';
 import Skycons from 'react-skycons';
+import socketIOClient from "socket.io-client";
 
 import { MirrorWeatherIcon, MirrorWeather, MirrorWeatherContainer, MirrorWeathersContainer } from './../../../components/Mirror';
 
 import * as actions from './../action';
 
+  const socket = socketIOClient();
+
 class Weather extends Component {
+
+
 
   constructor(props) {
     super(props);
@@ -17,13 +22,32 @@ class Weather extends Component {
       weather: false,
     };
 
+
+    let interval;
+
+    if(interval) {
+      clearInterval(interval);
+    }
+    interval = setInterval(() => {
+
+      this.getLocation();
+
+      socket.emit('getMirror', {weather: this.props.mirror.weather});
+
+    }, 1000 * 60 * 60);
+
+
+    socket.on('updateWeather', (data) => {
+      console.log('socketData: '+JSON.stringify(data.weather));
+    })
+
   }
+
   componentDidMount() {
-    this.props.getWeather(37.338208 , -121.88);
-
+    this.getLocation();
   }
 
-  getLocation() {
+  getLocation = () => {
       if ("geolocation" in navigator) {
         navigator.geolocation.getCurrentPosition(function(position) {
 
@@ -31,10 +55,13 @@ class Weather extends Component {
         console.log("latitudestate", position.coords.latitude);
         console.log("longitudestate", position.coords.longitude);
         this.props.getWeather(position.coords.latitude, position.coords.longitude);
-        });
+
+      }.bind(this));
+
       } else {
         console.log("failed to geolocate");
       }
+
   }
 
   formatTime(time) {

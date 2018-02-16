@@ -103,6 +103,12 @@ export const MirrorGet = (mirrorId) => {
   }
 };
 
+export const updateWeather = (data) => {
+  return dispatch => {
+    dispatch({ type: UPDATE_WEATHER, weather: res.data.data.weather,  errorMessage: ''});
+  }
+}
+
 ////////////////////////////////////////////////////////////
 //                    Delete Option                       //
 ////////////////////////////////////////////////////////////
