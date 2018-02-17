@@ -12,7 +12,7 @@ const apiUrl = process.env.apiUrl;
 export const newUser = (username, password) => {
 
   const newUserConfiguration = {
-    url: apiUrl + "user",
+    url: apiUrl + "/v1/user",
     method: 'post',
     payload: {
       "username": username,
@@ -52,7 +52,7 @@ export const logOut = () => {
 export const authenticate = (username, password) => {
 
   const authConfiguration = {
-    url: apiUrl + "auth",
+    url: apiUrl + "/v1/auth",
     method: 'post',
     auth: {
       "username": username,
@@ -85,7 +85,7 @@ export const authenticate = (username, password) => {
 
 export const validateToken = authToken => async (dispatch) => {
   const tokenConfig = {
-    url: apiUrl + 'verify/' + authToken,
+    url: apiUrl + '/v1/verify/' + authToken,
     config:
       { headers: {'Authorization': 'Bearer ' + authToken}}
   }
@@ -107,7 +107,7 @@ export const validateToken = authToken => async (dispatch) => {
 export const getUserData = (authToken, userId) => async (dispatch) => {
   console.log("user", userId);
   const userConfig = {
-    url: apiUrl + 'user/' + userId,
+    url: apiUrl + '/v1/user/' + userId,
     config:
       { headers: {'Authorization': 'Bearer ' + authToken}}
   }
