@@ -11,7 +11,7 @@ const apiUrl = process.env.apiUrl;
 export const MirrorPost = (userId) => {
 
   const mirrorConfiguration = {
-    url: apiUrl + "v1/mirror",
+    url: "/v1/mirror",
     method: 'post',
     mirror: {
       user: userId
@@ -43,7 +43,7 @@ export const MirrorPost = (userId) => {
 export const SectionPost = (userId, sectionName, option, mirrorId) => {
 
   const sectionConfiguration = {
-    url: apiUrl + "v1/section/",
+    url: "/v1/section/",
     method: 'post',
     section: {
       userId: userId,
@@ -78,7 +78,7 @@ export const SectionPost = (userId, sectionName, option, mirrorId) => {
 export const MirrorGet = (mirrorId) => {
 
   const mirrorConfiguration = {
-    url: apiUrl + "v1/mirror/" + mirrorId,
+    url: "/v1/mirror/" + mirrorId,
     method: 'get',
     mirror: {}
   }
@@ -113,7 +113,7 @@ export const updateWeather = (data) => {
 
 export const OptionDelete = (optionId) => async (dispatch) => {
   const optionConfig = {
-    url: apiUrl + 'v1/option/' + optionId
+    url: '/v1/option/' + optionId
   }
 
   dispatch({ type: OPTION_DELETE_REQUEST });
@@ -132,7 +132,7 @@ export const OptionDelete = (optionId) => async (dispatch) => {
 
 export const SectionDelete = (sectionId) => async (dispatch) => {
   const sectionConfig = {
-    url: apiUrl + 'v1/section/' + sectionId
+    url: '/v1/section/' + sectionId
   }
 
   dispatch({ type: SECTION_DELETE_REQUEST });
@@ -151,7 +151,7 @@ export const SectionDelete = (sectionId) => async (dispatch) => {
 
 export const MirrorDelete = (mirrorId) => async (dispatch) => {
   const mirrorConfig = {
-    url: apiUrl + 'v1/mirror/' + mirrorId
+    url: '/v1/mirror/' + mirrorId
   }
 
   dispatch({ type: MIRROR_DELETE_REQUEST });
@@ -171,7 +171,7 @@ export const MirrorDelete = (mirrorId) => async (dispatch) => {
 export const getWeather = (latitude, longitude) => async (dispatch) => {
 
   const weatherConfig = {
-    url: apiUrl + "v1/mirror/weather/w",
+    url: "/v1/mirror/weather/w",
     method: 'post',
     weather: {
       latitude: latitude,
