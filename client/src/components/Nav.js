@@ -2,9 +2,12 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { BrowserRouter, Route, Link } from 'react-router-dom';
 import styled from 'styled-components';
+import socketIOClient from 'socket.io-client';
 
 import {MenuBtn} from './MenuBtn';
 import * as actions from './../pages/auth/actions';
+
+const socket = socketIOClient();
 
 const NavContainer = styled.div`
   position: absolute;

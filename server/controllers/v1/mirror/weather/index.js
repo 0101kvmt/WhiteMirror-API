@@ -18,8 +18,7 @@ export default({ db }) => {
   //                       POST '/w'                        //
   ////////////////////////////////////////////////////////////
 
-  api.route('/w')
-    .post(weatherController.getWeather);
+  api.post('/w', weatherController.getWeather);
 
   return api;
 

@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
 import * as actions from './../action';
@@ -64,6 +65,9 @@ class MirrorList extends Component {
   addSection(){
     this.props.SectionPost()
   }
+  navMirrorEdit() {
+
+  }
 
   // render functions
 
@@ -77,7 +81,7 @@ class MirrorList extends Component {
 
             {this.props.auth.currentUser.mirror.map((m, i) => {
               return (
-                  <MirrorBox onClick={() => this.deleteMirror(m)} > {m._id} </MirrorBox>
+                  <Link to="/mirrorEditPage">Mirrors</Link>
               )
 
             })}

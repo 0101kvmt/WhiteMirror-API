@@ -9,12 +9,9 @@ import { MirrorWeatherIcon, MirrorWeather, MirrorWeatherContainer, MirrorWeather
 
 import * as actions from './../action';
 
-  const socket = socketIOClient();
+const socket = socketIOClient();
 
 class Weather extends Component {
-
-
-
   constructor(props) {
     super(props);
 
@@ -34,17 +31,18 @@ class Weather extends Component {
 
       socket.emit('getMirror', {weather: this.props.mirror.weather});
 
-    }, 1000 * 60 * 60);
+    }, 1000 * 60 * 60); // update every hr
 
 
     socket.on('updateWeather', (data) => {
-      console.log('socketData: '+JSON.stringify(data.weather));
+      console.log('socketData: '+ JSON.stringify(data.weather));
     })
 
   }
 
   componentDidMount() {
     this.getLocation();
+    socket.emit('getMirror', {weather: this.props.mirror.weather});
   }
 
   getLocation = () => {
