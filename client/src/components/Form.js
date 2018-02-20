@@ -28,7 +28,7 @@ export const InputButton = styled.input`
   display: inline-block;
   border-radius: 3px;
   padding: 5px 0;
-  margin: 5px 20px;
+  margin: 20px 20px;
   width: 150px;
   background: transparent;
   color: white;

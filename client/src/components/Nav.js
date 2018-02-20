@@ -62,18 +62,27 @@ class Nav extends Component {
       menuHidden: true,
       linkHidden:  this.props.auth.currentUser == null ? false : true
     };
+        console.log("NAVE");
+    console.log(socket);
+
+    socket.on('userUpdated', (data) => {
+      console.log('user Update');
+      console.log(data);
+      this.setState({linkHidden: this.props.auth.currentUser == null ? false : true})
+    })
   }
 
   menuClick(){
     console.log("menu clicked");
     this.setState(prevState => ({
-      menuHidden: !prevState.menuHidden
+      menuHidden: !prevState.menuHidden,
     }));
   };
 
   logout() {
     this.setState(prevState => ({
-      menuHidden: !prevState.menuHidden
+      menuHidden: !prevState.menuHidden,
+      linkHidden: this.props.auth.currentUser == null ? false : true
     }));
     this.props.logOut();
   };

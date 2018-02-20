@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { BrowserRouter, Route, Link } from 'react-router-dom';
+import { BrowserRouter, Route, Redirect, Link } from 'react-router-dom';
 import styled, { injectGlobal } from 'styled-components';
 import { Provider } from 'react-redux';
 import { PersistGate } from 'redux-persist/integration/react';

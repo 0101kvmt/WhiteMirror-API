@@ -36,6 +36,10 @@ class Weather extends Component {
 
     socket.on('updateWeather', (data) => {
       console.log('socketData: '+ JSON.stringify(data.weather));
+    });
+
+    socket.on('userUpdate', (data) => {
+      console.log('user updated: '+ JSON.stringify(data.data));
     })
 
   }

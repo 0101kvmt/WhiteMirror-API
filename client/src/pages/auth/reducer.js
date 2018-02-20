@@ -42,10 +42,10 @@ export default (state = INITIAL_STATE, action) => {
     case AUTH_SUCCESS:
       return { ...state, isRequesting: false, currentUser: action.currentUser, token: action.token, tokenUser: action.tokenUser, isAuthenticated: true };
     case AUTH_FAILURE:
-      return { ...state, isRequesting: false, isAuthenticated: false};
+      return { ...state, isRequesting: false, isAuthenticated: false, errorMessage: action.errorMessage};
 // Logout
     case LOGOUT_SUCCESS:
-      return {...state, isRequesting: false, isAuthenticated: false, currentUser: action.currentUser, token: action.token, tokenUser: action.tokenUser}
+      return {...state, isRequesting: false, isAuthenticated: false, currentUser: action.currentUser, token: action.token, tokenUser: action.tokenUser, validToke: false}
     default:
       return state;
   }
