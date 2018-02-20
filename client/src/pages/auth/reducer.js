@@ -45,7 +45,7 @@ export default (state = INITIAL_STATE, action) => {
       return { ...state, isRequesting: false, isAuthenticated: false, errorMessage: action.errorMessage};
 // Logout
     case LOGOUT_SUCCESS:
-      return {...state, isRequesting: false, isAuthenticated: false, currentUser: action.currentUser, token: action.token, tokenUser: action.tokenUser, validToke: false}
+      return {...state, isRequesting: false, isAuthenticated: false, currentUser: action.currentUser, token: action.token, tokenUser: action.tokenUser, validToken: false}
     default:
       return state;
   }

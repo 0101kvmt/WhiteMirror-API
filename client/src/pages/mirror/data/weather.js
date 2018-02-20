@@ -128,9 +128,10 @@ class Weather extends Component {
   }
 };
 
-const mapStateToProps = ({ mirror }) => {
+const mapStateToProps = ({ mirror, auth }) => {
   return {
-    mirror
+    mirror,
+    auth
   }
 };
 

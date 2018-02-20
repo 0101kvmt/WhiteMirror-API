@@ -29,6 +29,7 @@ class MirrorEditPage extends Component {
 
   renderMirror() {
     const mirrorList = this.props.auth.currentUser.mirror;
+
     console.log(mirrorList);
       return (
 

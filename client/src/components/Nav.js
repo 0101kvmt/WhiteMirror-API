@@ -2,12 +2,10 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { BrowserRouter, Route, Link } from 'react-router-dom';
 import styled from 'styled-components';
-import socketIOClient from 'socket.io-client';
 
 import {MenuBtn} from './MenuBtn';
 import * as actions from './../pages/auth/actions';
 
-const socket = socketIOClient();
 
 const NavContainer = styled.div`
   position: absolute;
@@ -62,14 +60,6 @@ class Nav extends Component {
       menuHidden: true,
       linkHidden:  this.props.auth.currentUser == null ? false : true
     };
-        console.log("NAVE");
-    console.log(socket);
-
-    socket.on('userUpdated', (data) => {
-      console.log('user Update');
-      console.log(data);
-      this.setState({linkHidden: this.props.auth.currentUser == null ? false : true})
-    })
   }
 
   menuClick(){
@@ -94,10 +84,10 @@ class Nav extends Component {
         <NavContainer hidden={this.state.menuHidden}>
           <ul>
             <NavLink onClick = {this.menuClick.bind(this)}><Link style={{...LinkStyle}} to="/">Home</Link></NavLink>
-            <NavLink hidden={!this.state.linkHidden} onClick = {this.menuClick.bind(this)}><Link style={{...LinkStyle}} to="/mirrorlist">Mirrors</Link></NavLink>
-            <NavLink hidden={this.state.linkHidden} onClick = {this.menuClick.bind(this)}><Link style={{...LinkStyle}} to="/login">Login</Link></NavLink>
-            <NavLink hidden={this.state.linkHidden} onClick = {this.menuClick.bind(this)}><Link style={{...LinkStyle}} to="/register">Register</Link></NavLink>
-            <NavLink hidden={!this.state.linkHidden} onClick = {this.logout.bind(this)}><Link style={{...LinkStyle}} to="/">Logout</Link></NavLink>
+            <NavLink hidden={!this.props.auth.currentUser} onClick = {this.menuClick.bind(this)}><Link style={{...LinkStyle}} to="/mirrorlist">Mirrors</Link></NavLink>
+            <NavLink hidden={this.props.auth.currentUser} onClick = {this.menuClick.bind(this)}><Link style={{...LinkStyle}} to="/login">Login</Link></NavLink>
+            <NavLink hidden={this.props.auth.currentUser} onClick = {this.menuClick.bind(this)}><Link style={{...LinkStyle}} to="/register">Register</Link></NavLink>
+            <NavLink hidden={!this.props.auth.currentUser} onClick = {this.logout.bind(this)}><Link style={{...LinkStyle}} to="/">Logout</Link></NavLink>
           </ul>
         </NavContainer>
       </WholeContainer>

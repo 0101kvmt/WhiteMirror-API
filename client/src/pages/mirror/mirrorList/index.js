@@ -65,6 +65,12 @@ class MirrorList extends Component {
   addSection(){
     this.props.SectionPost()
   }
+
+  editMirror = (mirror) => {
+    console.log("edit mirror", mirror);
+
+    this.props.currentMirror(mirror);
+  }
   navMirrorEdit() {
 
   }
@@ -81,7 +87,7 @@ class MirrorList extends Component {
 
             {this.props.auth.currentUser.mirror.map((m, i) => {
               return (
-                  <Link to="/mirrorEditPage">Mirrors</Link>
+                  <Link to="/mirrorEditPage" onClick={() => {this.editMirror(m)}} >{m._id}</Link>
               )
 
             })}
