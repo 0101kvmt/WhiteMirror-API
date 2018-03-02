@@ -1,5 +1,6 @@
 import mongoose from 'mongoose';
 
+import Option from './option';
 
 let Schema = mongoose.Schema;
 

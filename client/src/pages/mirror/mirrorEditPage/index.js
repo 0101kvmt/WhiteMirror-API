@@ -10,7 +10,7 @@ import Date from './../data/date';
 import Weather from './../data/weather';
 
 import { CenterWrapper, HorizontalRowWrapper } from '../../../components/Wrapper';
-import { Form, Input } from './../../../components/Form';
+import { FormWrapper, Form, Input, InputButton  } from './../../../components/Form';
 import { MirrorBox } from './../../../components/MirrorLists';
 
 class MirrorEditPage extends Component {
@@ -18,6 +18,7 @@ class MirrorEditPage extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      toDoText: ''
     };
   }
 
@@ -25,6 +26,14 @@ class MirrorEditPage extends Component {
 
   };
 
+  handleToDoText(e) {
+    this.setState({ toDoText: e.target.value});
+  }
+
+  handleSubmit(e) {
+    e.preventDefault();
+    console.log("Submitted new To-do", this.state.toDoText)
+  }
   // render functions
 
   renderMirror() {
@@ -43,6 +52,11 @@ class MirrorEditPage extends Component {
           <MirrorToDo> 4:54 PM Do not forget to pick up the {this.state.color} Avocados!</MirrorToDo>
           <MirrorToDo> 6:00 PM Dante invited you to make kale smoothie & tacos  </MirrorToDo>
           <MirrorToDo> 8:50 PM Fold laundry and organize papers.  </MirrorToDo>
+          <Form>
+            <Input type="text" placeholder="Add To-do" onChange={this.handleToDoText.bind(this)} value={this.state.toDoText} />
+
+            <InputButton type="submit" onClick={this.handleSubmit.bind(this)} />
+          </Form>
           <Weather/>
         </MirrorWrapper>
       )

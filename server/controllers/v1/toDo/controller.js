@@ -15,6 +15,17 @@ export const toDoGet = (req, res) => {
     })
 };
 
+export const toDoGetOne = (req, res) => {
+  ToDo.find({})
+    .exec()
+    .then(toDo => {
+      res.status(200).send(defaultResponseModel(true, 'Got ToDo List', {toDo: toDo}));
+    })
+    .catch(err => {
+      res.status(404).send(defaultResponseModel(false, 'ToDo does not exist in Database'))
+    })
+};
+
 export const toDoAdd = (req, res) => {
   const toDo = new ToDo({
     toDo: req.body.toDo,
