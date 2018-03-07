@@ -57,7 +57,7 @@ export default({db}) => {
   //                    DELETE '/:id'                       //
   ////////////////////////////////////////////////////////////
 
-  api.delete('/:id', (req,res) => {
+  api.delete('/:id', (req, res) => {
     Option.remove({_id: req.params.id})
     .then((option) => {
       res.status(200).send(defaultResponseModel(true,'Option deleted', {option_id: option._id}));
@@ -71,6 +71,31 @@ export default({db}) => {
   //                       PUT '/'                          //
   ////////////////////////////////////////////////////////////
 
-    return api;
+  api.put('/:id', (req, res) => {
+
+    const option = req.body.option;
+    const font = req.body.font;
+    const fontSize = req.body.fontSize;
+    const padding = req.body.padding;
+
+    Option.findById({_id: req.params.id})
+      .exec()
+      .then(option => {
+        option.option = option;
+        option.font = font;
+        option.fontSize = fontSize;
+        option.padding = padding;
+
+        return user.save();
+      })
+      .then(savedOption => {
+          res.status(200).send(defaultResponseModel(true, 'Option succesfully updated', option: option));
+      })
+      .catch(err => {
+        res.status(404).send(defaultResponseModel(false, 'Option failed to update: ' + err));
+      })
+  })
+
+  return api;
 
 }

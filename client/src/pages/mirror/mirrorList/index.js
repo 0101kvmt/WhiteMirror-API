@@ -90,7 +90,7 @@ class MirrorList extends Component {
               return (
                   <MirrorBox>
                     <MirrorDelete>x</MirrorDelete>
-                      <Link style={LinkStyle} to="/mirrorEditPage" onClick={() => {this.editMirror(m)}} >Mirror {i}</Link>
+                      <Link style={LinkStyle} to="/mirrorEditPage" onClick={() => {this.editMirror(m)}} >Mirror {i + 1}</Link>
                   </MirrorBox>
               )
 

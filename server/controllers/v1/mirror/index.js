@@ -41,13 +41,7 @@ export default({ db }) => {
 
   api.get('/:id', (req, res, next) => {
     Mirror.findById({ _id: req.params.id })
-      .populate({
-        path: 'section',
-        populate: {
-          path: 'options',
-          model: 'Option'
-        }
-      })
+    .populate([{path: 'section', populate: [{path: 'options'}]}])
       .exec()
       .then(mirror => {
         res.status(200).send(defaultResponseModel(true, 'Mirror has been succesfully found.', {mirror: mirror}));
@@ -126,6 +120,20 @@ export default({ db }) => {
       })
 
   });
+
+  api.put(':id', (req, res) => {
+
+    const mirrorName = req.body.mirrorName;
+
+    Mirror.findById({_id: req.params.id})
+      .then(mirror => {
+        mirror.mirrorName = mirrorName;
+        res.status(200).send(defaultResponseModel(true, 'Mirror name editted.'));
+      })
+      .catch(err => {
+        res.status(404).send(defaultResponseModel(false, 'Mirror failed to edit.'));
+      })
+  })
 
   return api;
 
