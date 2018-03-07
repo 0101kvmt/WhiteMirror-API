@@ -4,7 +4,6 @@ import App from './App';
 import { injectGlobal } from 'styled-components';
 
 const root = document.getElementById('root');
-console.log("hey hey hey");
 
 ReactDOM.render(<App />, root);
 
@@ -14,5 +13,10 @@ injectGlobal`
     padding: 0;
     margin: 0;
     font-family: Raleway;
+  }
+
+  Link {
+    color: white;
+    text-decoration: none;
   }
 `

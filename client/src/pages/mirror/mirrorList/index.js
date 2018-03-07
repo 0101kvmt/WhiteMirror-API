@@ -7,7 +7,7 @@ import * as actions from './../action';
 
 import { CenterWrapper, HorizontalRowWrapper } from '../../../components/Wrapper';
 import { Form, Input } from './../../../components/Form';
-import { MirrorBox } from './../../../components/MirrorLists';
+import { MirrorBox, MirrorBoxTitle, MirrorDelete, LinkStyle } from './../../../components/MirrorLists';
 
 class MirrorList extends Component {
 
@@ -19,7 +19,8 @@ class MirrorList extends Component {
     this.state = {
       user: this.props.auth.currentUser._id,
       options: ['Date', 'Time', 'To-do', 'Weather'],
-      sectionName: "sectionName"
+      sectionName: "sectionName",
+      clickable: true,
     };
   }
   componentDidMount(){
@@ -87,7 +88,10 @@ class MirrorList extends Component {
 
             {this.props.auth.currentUser.mirror.map((m, i) => {
               return (
-                  <Link to="/mirrorEditPage" onClick={() => {this.editMirror(m)}} >{m._id}</Link>
+                  <MirrorBox>
+                    <MirrorDelete>x</MirrorDelete>
+                      <Link style={LinkStyle} to="/mirrorEditPage" onClick={() => {this.editMirror(m)}} >Mirror {i}</Link>
+                  </MirrorBox>
               )
 
             })}
@@ -101,7 +105,7 @@ class MirrorList extends Component {
   renderAddMirrors(){
     if(this.props.auth.currentUser.mirror.length <= 5) {
       return(
-        <MirrorBox onClick={this.addMirror.bind(this)} > add me </MirrorBox>
+        <MirrorBox onClick={this.addMirror.bind(this)} clickable={this.state.clickable} > add me </MirrorBox>
       )
     }
   }
